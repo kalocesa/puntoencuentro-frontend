@@ -1,2 +1,13 @@
 @import "tailwindcss";
-@import url(./vendor/normalize.css);
+@layer base {
+  :root {
+    --title: "Shantell Sans", cursive;
+    --subtitle: "Baloo 2", sans-serif;
+    --text: "Fredoka", sans-serif;
+    --purple: #390099;
+    --wine: #9e0059;
+    --pink: #ff0054;
+    --orange: #ff5400;
+    --yellow: #ffbd00;
+  }
+}
