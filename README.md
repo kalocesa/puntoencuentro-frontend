@@ -1,12 +1,24 @@
-# React + Vite
+# 🌟 Punto Encuentro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Punto Encuentro** es una plataforma web diseñada para **amantes de los libros**. Con un diseño responsivo e intuitivo, puedes **organizar tu biblioteca personal**, actualizar el estado de tus lecturas y descubrir nuevas historias.
 
-Currently, two official plugins are available:
+## 📌 Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📖 **Gestiona tus libros**: Marca tus lecturas como **leídos, en lectura, por leer y favoritos**.
+- 🎭 **Explora géneros literarios**: Filtra tus libros por **Ficción, No Ficción, Terror, Fantasía, Romance, Misterio, Ciencia Ficción y Drama**.
+- 🖼️ **Personaliza tu perfil**: Cambia tu avatar entre **9 opciones diferentes**, edita tu **nombre, género favorito** y tu **descripción personal**.
+- 🔐 **Registro e inicio de sesión**: Guarda tu progreso y sincroniza tu biblioteca.
+- 📚 **Google Books API**: Accede a información detallada de libros con integración directa a la API.
 
-## Expanding the ESLint configuration
+## 🚀 Tecnologías utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Punto Encuentro se desarrolla utilizando herramientas modernas para mejorar la experiencia del usuario:
+
+- ⚡ **Vite**: Entorno de desarrollo rápido.
+- ⚛️ **React**: Construcción de componentes dinámicos.
+- 🏗️ **Tailwind CSS**: Diseño responsivo y moderno.
+- ✅ **ESLint**: Código limpio y estructurado.
+- 🖥️ **HTML, CSS, JavaScript**: Base del desarrollo frontend.
+- 🔧 **Visual Studio Code**: Editor de código.
+- 🗂️ **Git & GitHub**: Control de versiones y colaboración.
+- 📜 **Git Bash**: Gestión eficiente de repositorios.
