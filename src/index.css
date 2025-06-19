@@ -30,3 +30,10 @@
   --orange: #ff5400;
   --yellow: #ffbd00;
 }
+
+body {
+  font-family: var(--text);
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #000000;
+}
