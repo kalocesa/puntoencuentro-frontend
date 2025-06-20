@@ -1,0 +1,8 @@
+.hero-overlay__title {
+  font-family: var(--title);
+}
+
+.hero-overlay__subtitle {
+  font-family: var(--subtitle);
+  font-weight: 500;
+}
