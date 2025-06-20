@@ -1,11 +1,12 @@
-import { useState } from "react";
-import flecha from "@icons/Arrow-gender.svg";
+import { useState, useContext } from "react";
+import { GenderContext } from "../../../../contexts/GenderContext";
+import arrow from "@icons/Arrow-gender.svg";
 
 function Gender() {
   const [open, setOpen] = useState(false);
+  const { setSelectedGender } = useContext(GenderContext);
 
-  /* Tenemos un array con los géneros, pero se buscaría sacarlos de la API de Google Books */
-  const generos = [
+  const genders = [
     "Ficción",
     "No ficción",
     "Terror",
@@ -13,8 +14,12 @@ function Gender() {
     "Romance",
     "Misterio",
     "Ciencia ficción",
-    "Drama ",
+    "Drama",
   ];
+
+  const handleClick = (gender) => {
+    setSelectedGender(gender);
+  };
 
   return (
     <div className="inline-block text-left mt-1">
@@ -24,7 +29,7 @@ function Gender() {
       >
         Géneros
         <img
-          src={flecha}
+          src={arrow}
           alt="flecha rosa para abrir el menú de géneros de libros"
           className=""
         />
@@ -32,14 +37,13 @@ function Gender() {
 
       {open && (
         <ul className="mt-0 w-55 z-10">
-          {/* Probable tenga que hacer un boton dentro del li o quizá un anchor o un link */}
-          {generos.map((genero) => (
+          {genders.map((gender) => (
             <li
-              key={genero}
+              key={gender}
               className="px-4 py-1 hover:bg-gray-400/10 cursor-pointer text-sm "
-              onClick={() => handleClick(genero)}
+              onClick={() => handleClick(gender)}
             >
-              {genero}
+              {gender}
             </li>
           ))}
         </ul>
