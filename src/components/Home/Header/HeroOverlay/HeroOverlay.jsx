@@ -1,7 +1,7 @@
 import book from "@images/empireo.jpeg";
 import { useContext } from "react";
 import { GenderContext } from "../../../../contexts/GenderContext";
-
+import "../HeroOverlay/HeroOverlay.css";
 function HeroOverlay() {
   const { selectedGender } = useContext(GenderContext);
 
@@ -10,7 +10,7 @@ function HeroOverlay() {
       className="grid grid-cols-1 md:grid-cols-2 gap-x-6 max-w-[1440
     px] mx-auto"
     >
-      <h1 className="md:text-6xl text-2xl pt-0 pl-5 md:pl-20 self-center">
+      <h1 className="md:text-6xl text-2xl pt-0 pl-5 md:pl-20 self-center hero-overlay__title">
         {selectedGender === "" || selectedGender === null
           ? "Junio es pura fantasía"
           : `${selectedGender}`}
@@ -23,7 +23,7 @@ function HeroOverlay() {
           className="w-[100px] h-[150px] md:w-[150px] md:h-[200px] rounded-2xl shadow-xl"
         />
         <div className="flex flex-col relative">
-          <h2 className="text-md md:text-2xl mt-5 ml-3 min-w-[200px]">
+          <h2 className="text-md md:text-2xl mt-5 ml-3 min-w-[200px] hero-overlay__subtitle">
             Nuestro favorito <br /> del mes
           </h2>
           <button
