@@ -1,10 +1,13 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { GenderContext } from "../../../../contexts/GenderContext";
+import useOutsideClick from "../../../../hooks/useClickOutside";
 import arrow from "@icons/Arrow-gender.svg";
 
-function Gender() {
+function Gender({ setIsMenuOpen }) {
   const [open, setOpen] = useState(false);
   const { setSelectedGender } = useContext(GenderContext);
+  const genderRef = useRef(null);
+  useOutsideClick(genderRef, () => setOpen(false));
 
   const genders = [
     "Ficción",
@@ -19,10 +22,12 @@ function Gender() {
 
   const handleClick = (gender) => {
     setSelectedGender(gender);
+    setOpen(false);
+    setIsMenuOpen(false);
   };
 
   return (
-    <div className="inline-block text-left mt-1">
+    <div ref={genderRef} className="inline-block text-left mt-1">
       <button
         onClick={() => setOpen(!open)}
         className="px-4 py-1 flex items-center justify-between w-55 cursor-pointer hover:bg-gray-400/10"
@@ -41,7 +46,9 @@ function Gender() {
             <li
               key={gender}
               className="px-4 py-1 hover:bg-gray-400/10 cursor-pointer text-sm "
-              onClick={() => handleClick(gender)}
+              onClick={() => {
+                handleClick(gender);
+              }}
             >
               {gender}
             </li>

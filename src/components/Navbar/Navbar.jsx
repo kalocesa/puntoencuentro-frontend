@@ -4,11 +4,15 @@ import blackMenu from "@icons/menu-black.svg";
 import whiteMenu from "@icons/menu-white.svg";
 import blackShare from "@icons/share-black.svg";
 import Menu from "./Menu/Menu.jsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import useClickOutside from "../../hooks/useClickOutside.js";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef(null);
+  useClickOutside(menuRef, () => setIsMenuOpen(false));
 
   /* Probable el scroll lo pase a header para que se active al ya no estar en esa sección, por el diseño responsivo */
   useEffect(() => {
@@ -59,9 +63,12 @@ function Navbar() {
             className="absolute right-3 top-1/2 -translate-y-1/2 w-5"
           />
         </div>
-        <div className="relative">
+        <div ref={menuRef} className="relative">
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMenuOpen((prev) => !prev);
+            }}
             className="p-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1"
           >
             <img
@@ -77,7 +84,11 @@ function Navbar() {
                 scrolled ? "bg-stone-900" : "bg-stone-900/10"
               } `}
             >
-              <Menu isLoggedIn={true} />
+              <Menu
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                setIsMenuOpen={setIsMenuOpen}
+              />
             </div>
           )}
         </div>
