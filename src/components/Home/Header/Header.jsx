@@ -24,7 +24,7 @@ function Header() {
   };
 
   return (
-    <header className="relative h-[800px] overflow-hidden">
+    <header className="relative h-[500px] md:h-[800px] overflow-hidden">
       {/* Imagen de fondo */}
       <img
         src={genreViews[selectedGender] || fantasyView}
@@ -34,7 +34,7 @@ function Header() {
       />
 
       {/* Contenido encima */}
-      <div className="relative z-10 top-120">
+      <div className="relative top-65  md:top-115">
         <HeroOverlay />
       </div>
     </header>

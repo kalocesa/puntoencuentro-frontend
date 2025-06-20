@@ -6,23 +6,24 @@ function HeroOverlay() {
   const { selectedGender } = useContext(GenderContext);
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 gap-x-6 max-w-[1120px] mx-auto border">
-      {/* Bloque de texto */}
-
-      <h1 className="lg:text-6xl md:text-5xl text-4xl p-5 self-center border">
+    <section
+      className="grid grid-cols-1 md:grid-cols-2 gap-x-6 max-w-[1440
+    px] mx-auto"
+    >
+      <h1 className="md:text-6xl text-2xl pt-0 pl-5 md:pl-20 self-center">
         {selectedGender === "" || selectedGender === null
           ? "Junio es pura fantasía"
           : `${selectedGender}`}
       </h1>
-      {/* Bloque del libro */}
-      <div className="flex flex-row p-5 justify-start md:justify-end border">
+
+      <div className="flex flex-row p-5 md:p-15 justify-start md:justify-center">
         <img
           src={book}
           alt="Imagen del libro"
           className="w-[100px] h-[150px] md:w-[150px] md:h-[200px] rounded-2xl shadow-xl"
         />
-        <div className="flex flex-col relative min-h-[100px] max-h-[200px] min-w-[100px]">
-          <h2 className="text-md md:text-2xl mt-5 ml-3 min-w-[150px]">
+        <div className="flex flex-col relative">
+          <h2 className="text-md md:text-2xl mt-5 ml-3 min-w-[200px]">
             Nuestro favorito <br /> del mes
           </h2>
           <button
