@@ -1,8 +1,8 @@
-import logoBlanco from "@icons/logoBlanco.png";
-import logoNegro from "@icons/logoNegro.svg";
-import menuNegro from "@icons/menu-black.svg";
-import menuBlanco from "@icons/menu-white.svg";
-import lupaNegro from "@icons/share-black.svg";
+import whiteLogo from "@icons/LogoBlanco.png";
+import blackLogo from "@icons/logoNegro.svg";
+import blackMenu from "@icons/menu-black.svg";
+import whiteMenu from "@icons/menu-white.svg";
+import blackShare from "@icons/share-black.svg";
 import Menu from "./Menu/Menu.jsx";
 import { useState, useEffect } from "react";
 
@@ -35,7 +35,7 @@ function Navbar() {
     >
       <div className="flex items-center gap-2 text-xl font-bold text-indigo-600">
         <img
-          src={scrolled ? logoBlanco : logoNegro}
+          src={scrolled ? whiteLogo : blackLogo}
           alt="Logo"
           className="w-17 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1 cursor-pointer"
         />
@@ -54,7 +54,7 @@ function Navbar() {
           />
           {/* Esta imagen debería de ser un botón o un Link, investigar */}
           <img
-            src={lupaNegro}
+            src={blackShare}
             alt="Buscar"
             className="absolute right-3 top-1/2 -translate-y-1/2 w-5"
           />
@@ -65,7 +65,7 @@ function Navbar() {
             className="p-2 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1"
           >
             <img
-              src={scrolled ? menuBlanco : menuNegro}
+              src={scrolled ? whiteMenu : blackMenu}
               alt="Menú"
               className="w-6"
             />
