@@ -1,11 +1,16 @@
 import avatar from "@images/avatar2.png";
 import Gender from "./Gender/Gender.jsx";
 import { Link } from "react-router-dom";
+import useClickOutside from "../../../hooks/useClickOutside.js";
+import { useRef } from "react";
 
-function Menu({ isLoggedIn }) {
+function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
   /* Revisar el isLoggedIn para verificar la autenticación del inicio de sesión, cerrar sesión y registrarse */
+  const menuRef = useRef(null);
+  useClickOutside(menuRef, () => setIsMenuOpen(false));
+
   return (
-    <>
+    <div ref={menuRef}>
       {isLoggedIn ? (
         <>
           <div className="flex justify-evenly items-center gap-3">
@@ -20,14 +25,18 @@ function Menu({ isLoggedIn }) {
             {/* Probable tenga que cambiar el to por un OnClick, investigar */}
             <Link
               to="/profile"
+              onClick={() => setIsMenuOpen(false)}
               className="px-4 py-1 cursor-pointer hover:bg-gray-400/10"
             >
               Ver perfil
             </Link>
-            <Gender />
+            <Gender setIsMenuOpen={setIsMenuOpen} />
             {/* Quisiera cambiar los botones por Link, para manejar las rutas a "/signin" y "/signup" */}
             <button
-              onClick={() => isLoggedIn(false)}
+              onClick={() => {
+                setIsLoggedIn(false);
+                setIsMenuOpen(false);
+              }}
               className="mt-2 px-4 py-1 rounded-full bg-[#ff0054] hover:bg-[#ff0054]/30 cursor-pointer"
             >
               Cerrar sesión
@@ -37,20 +46,26 @@ function Menu({ isLoggedIn }) {
       ) : (
         <div className="flex flex-col">
           <button
-            onClick={() => isLoggedIn(true)}
+            onClick={() => {
+              setIsLoggedIn(true);
+              setIsMenuOpen(false);
+            }}
             className="mt-2 px-4 py-1 rounded-full bg-[#ff0054] hover:bg-[#ff0054]/30 cursor-pointer"
           >
             Iniciar sesión
           </button>
           <button
-            onClick={() => isLoggedIn(true)}
+            onClick={() => {
+              setIsLoggedIn(false);
+              setIsMenuOpen(false);
+            }}
             className="mt-2 px-4 py-1 rounded-full bg-[#ff5400] hover:bg-[#ff5400]/30 cursor-pointer"
           >
             Registrarse
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
