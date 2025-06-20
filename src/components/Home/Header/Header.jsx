@@ -1,13 +1,14 @@
 import fictionView from "@images/back-ficcion.png";
 import nonFictionView from "@images/back-noficcion.png";
 import horrorView from "@images/back-terror.png";
-import fantasyView from "@images/back-fantasia.png";
+import fantasyView from "@images/sauron.png";
 import romanceView from "@images/back-romance.png";
 import mysteryView from "@images/back-misterio.png";
 import sciFiView from "@images/back-cienciaficcion.png";
 import dramaView from "@images/back-drama.png";
 import { useContext } from "react";
 import { GenderContext } from "../../../contexts/GenderContext";
+import HeroOverlay from "./HeroOverlay/HeroOverlay";
 
 function Header() {
   const { selectedGender } = useContext(GenderContext);
@@ -23,11 +24,19 @@ function Header() {
   };
 
   return (
-    <header id="hero">
+    <header className="relative h-[800px] overflow-hidden">
+      {/* Imagen de fondo */}
       <img
         src={genreViews[selectedGender] || fantasyView}
         alt={`Fondo para el género: ${selectedGender}` || "Fantasía"}
+        id="hero"
+        className="absolute inset-0 w-full h-full object-cover z-0"
       />
+
+      {/* Contenido encima */}
+      <div className="relative z-10 top-120">
+        <HeroOverlay />
+      </div>
     </header>
   );
 }
