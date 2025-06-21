@@ -25,15 +25,15 @@ function BookModal({ book, onClose }) {
         {/* Aquí empieza el grid */}
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Primera columna */}
-          <div className="justify-self-start md:justify-self-center mb-4">
+          <div className="justify-self-start md:justify-self-center mb-4 bg-stone-50 rounded-lg p-2">
             <img
               src={book.cover}
               alt={`Portada de ${book.title}`}
               className="w-32 md:w-50 mx-auto object-cover rounded-lg"
             />
             {/* grid de los botones guardar y like */}
-            <div className="grid grid-cols-2 mt-5">
-              <button className="px-2 py-1 text-sm bg-[#ffbd00] hover:bg-yellow-700 rounded-full cursor-pointer">
+            <div className="grid grid-cols-2 mt-2 max-w-[125px] md:max-w-[200px]">
+              <button className="px-2 py-1 min-w-[80px] md:min-w-[120px] text-sm bg-[#ffbd00] hover:bg-yellow-700 rounded-full cursor-pointer">
                 Guardar
               </button>
 
