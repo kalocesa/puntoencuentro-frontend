@@ -2,6 +2,7 @@ import close from "@icons/close.svg";
 import like from "@icons/like.svg";
 import dislike from "@icons/dislike.svg";
 import "../BookModal/BookModal.css";
+import SaveDropdown from "../SaveDropDown/SaveDropDown";
 import { useState } from "react";
 
 function BookModal({ book, onClose }) {
@@ -33,9 +34,15 @@ function BookModal({ book, onClose }) {
             />
             {/* grid de los botones guardar y like */}
             <div className="grid grid-cols-2 mt-2 max-w-[125px] md:max-w-[200px]">
-              <button className="px-2 py-1 min-w-[80px] md:min-w-[120px] text-sm bg-[#ffbd00] hover:bg-yellow-700 rounded-full cursor-pointer">
-                Guardar
-              </button>
+              <SaveDropdown
+                currentStatus={book.status}
+                onSelectStatus={(newStatus) => {
+                  // Acá podrías guardar el nuevo estado si estás levantando ese dato al padre
+                  console.log("Estado seleccionado:", newStatus);
+                  // Por ejemplo, podrías hacer:
+                  // book.status = newStatus; // si lo estás manejando local, o con context
+                }}
+              />
 
               <button
                 onClick={toggleLike}
