@@ -7,7 +7,7 @@
     "publisher": "Aurora Editorial",
     "publishedDate": "2021-06-15",
     "description": "En una ciudad envuelta por la niebla eterna, una joven bibliotecaria descubre que los libros susurran secretos del pasado... y del futuro.",
-    "cover": "public/book.png"
+    "cover": "/book.png"
   },
   {
     "id": "libro-002",
