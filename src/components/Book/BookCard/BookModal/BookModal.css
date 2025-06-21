@@ -1,0 +1,7 @@
+.bookmodal__property {
+  font-family: var(--subtitle);
+}
+
+.bookmodal__property-span {
+  font-family: var(--text);
+}
