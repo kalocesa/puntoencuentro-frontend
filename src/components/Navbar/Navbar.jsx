@@ -1,4 +1,4 @@
-import whiteLogo from "@icons/LogoBlanco.png";
+import whiteLogo from "@icons/logoBlanco.png";
 import blackLogo from "@icons/logoNegro.svg";
 import blackMenu from "@icons/menu-black.svg";
 import whiteMenu from "@icons/menu-white.svg";
