@@ -1,11 +1,11 @@
 import like from "@icons/like.svg";
 import dislike from "@icons/dislike.svg";
-import { useState } from "react";
 
-function BookCard({ book, onDiscover }) {
-  const [liked, setLiked] = useState(false);
-  const toggleLike = () => {
-    setLiked((prev) => !prev);
+function BookCard({ book, onDiscover, liked, onToggleLike, currentStatus }) {
+  const statusColors = {
+    Leer: "bg-[#FFBD00] hover:bg-yellow-600",
+    Leyendo: "bg-[#FF5400] hover:bg-orange-800",
+    Leídos: "bg-[#FF0054] hover:bg-pink-700",
   };
 
   return (
@@ -33,13 +33,15 @@ function BookCard({ book, onDiscover }) {
         <footer className="py-2 grid grid-col-2">
           <button
             onClick={() => onDiscover(book)}
-            className="ml-2 px-2 py-1 text-sm bg-[#ffbd00] hover:bg-yellow-700 rounded-full cursor-pointer col-1"
+            className={`ml-2 px-2 py-1 text-sm rounded-full cursor-pointer col-1 ${
+              statusColors[currentStatus] || "bg-[#9E0059] hover:bg-rose-950"
+            }`}
           >
-            Descubre
+            {currentStatus || "Descubre"}
           </button>
 
           <button
-            onClick={toggleLike}
+            onClick={onToggleLike}
             className="w-7 cursor-pointer col-2 ml-auto mr-2 transition-transform hover:scale-115"
             aria-pressed={liked}
           >

@@ -3,16 +3,24 @@ import like from "@icons/like.svg";
 import dislike from "@icons/dislike.svg";
 import "../BookModal/BookModal.css";
 import SaveDropdown from "../SaveDropDown/SaveDropDown";
-import { useState } from "react";
 
-function BookModal({ book, onClose }) {
-  const [liked, setLiked] = useState(false);
-  const toggleLike = () => {
-    setLiked((prev) => !prev);
-  };
+function BookModal({
+  book,
+  onClose,
+  liked,
+  onToggleLike,
+  currentStatus,
+  onSelectStatus,
+}) {
   return (
-    <div className="fixed inset-0 bg-stone-950/50 flex items-center justify-center z-50">
-      <div className="bg-black rounded-lg shadow-2xl shadow-stone-950 max-w-[550px] p-6 relative">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 bg-stone-950/50 flex items-center justify-center z-50"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="bg-black rounded-lg shadow-2xl shadow-stone-950 max-w-[550px] p-6 relative"
+      >
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-sm text-gray-500 hover:text-black cursor-pointer"
@@ -35,17 +43,12 @@ function BookModal({ book, onClose }) {
             {/* grid de los botones guardar y like */}
             <div className="grid grid-cols-2 mt-2 max-w-[125px] md:max-w-[200px]">
               <SaveDropdown
-                currentStatus={book.status}
-                onSelectStatus={(newStatus) => {
-                  // Acá podrías guardar el nuevo estado si estás levantando ese dato al padre
-                  console.log("Estado seleccionado:", newStatus);
-                  // Por ejemplo, podrías hacer:
-                  // book.status = newStatus; // si lo estás manejando local, o con context
-                }}
+                currentStatus={currentStatus}
+                onSelectStatus={onSelectStatus}
               />
 
               <button
-                onClick={toggleLike}
+                onClick={onToggleLike}
                 className="w-7 cursor-pointer ml-auto transition-transform hover:scale-115"
                 aria-pressed={liked}
               >
