@@ -45,7 +45,8 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
         </>
       ) : (
         <div className="flex flex-col">
-          <button
+          <Link
+            to="/signin"
             onClick={() => {
               setIsLoggedIn(true);
               setIsMenuOpen(false);
@@ -53,8 +54,9 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
             className="mt-2 px-4 py-1 rounded-full bg-[#ff0054] hover:bg-[#ff0054]/30 cursor-pointer"
           >
             Iniciar sesión
-          </button>
-          <button
+          </Link>
+          <Link
+            to="/signup"
             onClick={() => {
               setIsLoggedIn(false);
               setIsMenuOpen(false);
@@ -62,7 +64,7 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
             className="mt-2 px-4 py-1 rounded-full bg-[#ff5400] hover:bg-[#ff5400]/30 cursor-pointer"
           >
             Registrarse
-          </button>
+          </Link>
         </div>
       )}
     </div>

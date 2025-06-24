@@ -2,10 +2,10 @@ import whiteLogo from "@icons/logoBlanco.png";
 import blackLogo from "@icons/logoNegro.svg";
 import blackMenu from "@icons/menu-black.svg";
 import whiteMenu from "@icons/menu-white.svg";
-import blackShare from "@icons/share-black.svg";
 import Menu from "./Menu/Menu.jsx";
 import SearchBar from "./SearchBar/SearchBar.jsx";
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import useClickOutside from "../../hooks/useClickOutside.js";
 
 function Navbar() {
@@ -39,11 +39,13 @@ function Navbar() {
       }`}
     >
       <div className="flex items-center gap-2 text-xl font-bold text-indigo-600">
-        <img
-          src={scrolled ? whiteLogo : blackLogo}
-          alt="Logo"
-          className="w-17 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1 cursor-pointer"
-        />
+        <Link to="/">
+          <img
+            src={scrolled ? whiteLogo : blackLogo}
+            alt="Logo"
+            className="w-17 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1 cursor-pointer"
+          />
+        </Link>
       </div>
       <div className="flex items-center gap-4">
         <SearchBar scrolled={scrolled} />
