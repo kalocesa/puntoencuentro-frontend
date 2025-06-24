@@ -4,6 +4,7 @@ import blackMenu from "@icons/menu-black.svg";
 import whiteMenu from "@icons/menu-white.svg";
 import blackShare from "@icons/share-black.svg";
 import Menu from "./Menu/Menu.jsx";
+import SearchBar from "./SearchBar/SearchBar.jsx";
 import { useState, useEffect, useRef } from "react";
 import useClickOutside from "../../hooks/useClickOutside.js";
 
@@ -45,24 +46,7 @@ function Navbar() {
         />
       </div>
       <div className="flex items-center gap-4">
-        <div className="relative">
-          {/* El input debería de tener un submit en la lupa o que se active con la tecla "enter" para que busque lo que está escrito */}
-          <input
-            type="text"
-            placeholder="Buscar"
-            className={`w-[100px] lg:w-[320px] md:w-[260px] sm:w-[200px] pl-3 pr-10 py-1 rounded-full focus:outline-none text-black ${
-              scrolled
-                ? "bg-white placeholder-gray"
-                : "bg-zinc-200 placeholder-black"
-            }`}
-          />
-          {/* Esta imagen debería de ser un botón o un Link, investigar */}
-          <img
-            src={blackShare}
-            alt="Buscar"
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-5"
-          />
-        </div>
+        <SearchBar scrolled={scrolled} />
         <div ref={menuRef} className="relative">
           <button
             onClick={(e) => {
