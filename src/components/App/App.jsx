@@ -1,10 +1,12 @@
 import Footer from "@components/Footer/Footer.jsx";
 import Navbar from "../Navbar/Navbar.jsx";
 import Home from "../Home/Home.jsx";
+import SectionPage from "../SectionPage/SectionPage.jsx";
+import { Register } from "../Register/Register.jsx";
 import { Routes, Route } from "react-router-dom";
 import { GenderProvider } from "../../contexts/GenderContext";
 import { BookProvider } from "../../contexts/BookContext.jsx";
-import SectionPage from "../SectionPage/SectionPage.jsx";
+import Login from "../Login/Login.jsx";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/seccion/:seccionId" element={<SectionPage />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
         </Routes>
         <Footer />
       </BookProvider>
