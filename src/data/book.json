@@ -98,5 +98,355 @@
     "publishedDate": "2024-02-25",
     "description": "Una ciudad olvidada bajo el mar y los secretos que guardan sus libros enterrados entre corales.",
     "cover": "/book.png"
+  },
+  {
+    "id": "libro-011",
+    "title": "Alas de Ceniza",
+    "author": "Renata Solís",
+    "pageCount": 298,
+    "publisher": "Niebla Ediciones",
+    "publishedDate": "2023-11-08",
+    "description": "Una joven fugitiva descubre que sus recuerdos son llaves para abrir alas hechas de humo.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-012",
+    "title": "Las Alas del Invierno",
+    "author": "Tomás Aguilar",
+    "pageCount": 356,
+    "publisher": "Senda Boreal",
+    "publishedDate": "2022-12-15",
+    "description": "En un mundo atrapado en hielo eterno, los sueños toman vuelo sobre alas de escarcha.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-013",
+    "title": "Alas de Cristal",
+    "author": "Emilia Corral",
+    "pageCount": 241,
+    "publisher": "Pluma Sutil",
+    "publishedDate": "2021-04-03",
+    "description": "Una bailarina ciega descubre una ciudad suspendida entre espejos y alas translúcidas.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-014",
+    "title": "Con Alas de Sal",
+    "author": "Bárbara Delmar",
+    "pageCount": 370,
+    "publisher": "Rosa Náutica",
+    "publishedDate": "2023-07-12",
+    "description": "Un poeta naufraga en un archipiélago donde los recuerdos se convierten en gaviotas.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-015",
+    "title": "Las Alas que no Volaron",
+    "author": "Federico Janer",
+    "pageCount": 312,
+    "publisher": "Ínsula Negra",
+    "publishedDate": "2020-09-19",
+    "description": "Cinco vidas cruzadas por promesas rotas y alas que solo existieron en la imaginación.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-016",
+    "title": "Alas sobre el Laberinto",
+    "author": "María Fernanda Luz",
+    "pageCount": 289,
+    "publisher": "Fósforo Azul",
+    "publishedDate": "2021-06-11",
+    "description": "Una bibliotecaria encuentra un pasaje secreto a través de libros vivos con alas.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-017",
+    "title": "Alas de Humo",
+    "author": "César Alvarado",
+    "pageCount": 230,
+    "publisher": "Sombra & Compañía",
+    "publishedDate": "2023-10-04",
+    "description": "Un incendio revela que el fuego no destruye todos los secretos: algunos vuelan.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-018",
+    "title": "Donde Nacen las Alas",
+    "author": "Andrea Castañeda",
+    "pageCount": 318,
+    "publisher": "Vértigo Literario",
+    "publishedDate": "2022-01-26",
+    "description": "Cada generación de mujeres hereda una cicatriz y un par de alas que nadie más puede ver.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-019",
+    "title": "Alas para un Adiós",
+    "author": "Lina Torres",
+    "pageCount": 294,
+    "publisher": "Pájaros de Tinta",
+    "publishedDate": "2024-03-07",
+    "description": "En un tren detenido en el tiempo, una carta extraviada busca su destino final.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-020",
+    "title": "Las Alas del Silencio",
+    "author": "Ramiro Acevedo",
+    "pageCount": 333,
+    "publisher": "Marea Baja Editorial",
+    "publishedDate": "2020-08-14",
+    "description": "Un niño mudo hereda un diario mágico que le enseña a comunicarse con el viento.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-021",
+    "title": "El Jardín sin Alas",
+    "author": "Isabela Font",
+    "pageCount": 282,
+    "publisher": "Flor de Nube",
+    "publishedDate": "2023-05-20",
+    "description": "Tras una catástrofe, un grupo de niñas crea su propio lenguaje hecho de pétalos y alas de insectos.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-022",
+    "title": "Alas de Menta y Oro",
+    "author": "Héctor Medina",
+    "pageCount": 310,
+    "publisher": "Aurora Sur",
+    "publishedDate": "2021-11-29",
+    "description": "Un chef sin olfato descubre un recetario que transforma sabores en visiones aladas.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-023",
+    "title": "Alas de Tormenta",
+    "author": "Violeta Arce",
+    "pageCount": 266,
+    "publisher": "Trópico Sur",
+    "publishedDate": "2022-07-09",
+    "description": "Una meteoróloga obsesionada con los rayos encuentra una ciudad en las nubes.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-024",
+    "title": "Los que Pintaban Alas",
+    "author": "Germán Lagos",
+    "pageCount": 301,
+    "publisher": "Temblor Ediciones",
+    "publishedDate": "2021-02-17",
+    "description": "En una isla prohibida, un grupo de artistas se dedica a tatuar el alma.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-025",
+    "title": "Alas en la Arena",
+    "author": "Elena Sifuentes",
+    "pageCount": 275,
+    "publisher": "Oasis Literario",
+    "publishedDate": "2024-01-10",
+    "description": "Un explorador encuentra huellas aladas en el desierto que desaparecen cada atardecer.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-026",
+    "title": "Las Voces de la Niebla",
+    "author": "Nicolás Barea",
+    "pageCount": 288,
+    "publisher": "Alfaguara",
+    "publishedDate": "2023-09-14",
+    "description": "Un hombre regresa a su pueblo natal donde la niebla murmura los pensamientos que nadie se atreve a decir.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-027",
+    "title": "Fábulas de un Reloj Roto",
+    "author": "Lucía Serna",
+    "pageCount": 312,
+    "publisher": "Alfaguara",
+    "publishedDate": "2022-12-01",
+    "description": "En una ciudad que vive el mismo minuto una y otra vez, una niña aprende a escribir el tiempo con palabras.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-028",
+    "title": "Cartas a un Universo Desconocido",
+    "author": "Iván Calderón",
+    "pageCount": 277,
+    "publisher": "Alfaguara",
+    "publishedDate": "2021-06-08",
+    "description": "Un cartero estelar recoge correspondencia de mundos que ya no existen.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-029",
+    "title": "La Torre que Latía",
+    "author": "Valeria Marín",
+    "pageCount": 359,
+    "publisher": "Alfaguara",
+    "publishedDate": "2024-04-17",
+    "description": "Un arquitecto descubre que su último diseño tiene pulso... y hambre de memorias.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-030",
+    "title": "El Rumor de las Piedras",
+    "author": "Eloy Fierro",
+    "pageCount": 221,
+    "publisher": "Alfaguara",
+    "publishedDate": "2020-10-27",
+    "description": "En las montañas del sur, las rocas hablan y quien las escucha puede recordar vidas que no son suyas.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-031",
+    "title": "La Última Lluvia",
+    "author": "Marina Valls",
+    "pageCount": 340,
+    "publisher": "Alfaguara",
+    "publishedDate": "2023-02-11",
+    "description": "Una sequía eterna cubre el mundo, hasta que alguien roba una nube.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-032",
+    "title": "Habitación 13B",
+    "author": "Héctor Molinero",
+    "pageCount": 199,
+    "publisher": "Alfaguara",
+    "publishedDate": "2021-07-05",
+    "description": "Cada huésped despierta con un recuerdo que no le pertenece, y la habitación nunca está vacía.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-033",
+    "title": "El Mar Bajo el Espejo",
+    "author": "Ágata Ruiz",
+    "pageCount": 326,
+    "publisher": "Alfaguara",
+    "publishedDate": "2022-03-16",
+    "description": "Un espejo heredado revela escenas de un océano que nadie ha navegado jamás.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-034",
+    "title": "Lágrimas de Alambre",
+    "author": "Sebastián Prieto",
+    "pageCount": 284,
+    "publisher": "Alfaguara",
+    "publishedDate": "2020-12-03",
+    "description": "Durante una guerra olvidada, un niño construye marionetas que lloran recuerdos.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-035",
+    "title": "Donde Duermen las Estatuas",
+    "author": "Vera de León",
+    "pageCount": 310,
+    "publisher": "Alfaguara",
+    "publishedDate": "2024-06-01",
+    "description": "Una restauradora de arte revive sin querer las almas atrapadas en esculturas milenarias.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-036",
+    "title": "La Brújula de los Recuerdos",
+    "author": "Mara Cortés",
+    "pageCount": 310,
+    "publisher": "Alfaguara",
+    "publishedDate": "2022-05-10",
+    "description": "Una joven encuentra un objeto que señala memorias olvidadas en lugar del norte.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-037",
+    "title": "La Isla que Despierta",
+    "author": "Rodrigo Sanz",
+    "pageCount": 278,
+    "publisher": "Alfaguara",
+    "publishedDate": "2023-03-22",
+    "description": "Cada cien años, una isla emerge del océano trayendo consigo voces del pasado.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-038",
+    "title": "La Llama Escondida",
+    "author": "Isela Figueroa",
+    "pageCount": 295,
+    "publisher": "Alfaguara",
+    "publishedDate": "2021-11-13",
+    "description": "En un convento abandonado, una niña descubre una antorcha que revela verdades incómodas.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-039",
+    "title": "La Canción del Árbol Hueco",
+    "author": "Benjamín Acosta",
+    "pageCount": 327,
+    "publisher": "Alfaguara",
+    "publishedDate": "2024-01-04",
+    "description": "Un árbol ancestral entona melodías que solo los corazones rotos pueden oír.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-040",
+    "title": "La Inquilina de los Espejos",
+    "author": "Verónica Ledezma",
+    "pageCount": 312,
+    "publisher": "Alfaguara",
+    "publishedDate": "2022-07-27",
+    "description": "Una pintora obsesionada con su reflejo descubre a una mujer atrapada en el cristal.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-041",
+    "title": "La Noche sin Lunas",
+    "author": "Omar Landeros",
+    "pageCount": 264,
+    "publisher": "Alfaguara",
+    "publishedDate": "2020-02-19",
+    "description": "Durante una tormenta eterna, una comunidad lucha por recordar cómo era el cielo.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-042",
+    "title": "La Dama del Reloj de Arena",
+    "author": "Dalia Salcedo",
+    "pageCount": 348,
+    "publisher": "Alfaguara",
+    "publishedDate": "2023-09-09",
+    "description": "Una mujer viaja en el tiempo atrapada entre granos de arena y promesas no cumplidas.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-043",
+    "title": "La Casa de las Sombras Pequeñas",
+    "author": "Matías Rangel",
+    "pageCount": 301,
+    "publisher": "Alfaguara",
+    "publishedDate": "2021-04-16",
+    "description": "En un vecindario olvidado, hay una casa donde las sombras tienen nombre propio.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-044",
+    "title": "La Memoria de los Pájaros",
+    "author": "Irene Valdés",
+    "pageCount": 289,
+    "publisher": "Alfaguara",
+    "publishedDate": "2022-08-30",
+    "description": "Una ornitóloga descubre que ciertas aves migratorias llevan secretos humanos.",
+    "cover": "/book.png"
+  },
+  {
+    "id": "libro-045",
+    "title": "La Huella que no Vuelve",
+    "author": "Luis Ferrán",
+    "pageCount": 275,
+    "publisher": "Alfaguara",
+    "publishedDate": "2020-06-01",
+    "description": "Un exiliado regresa a su tierra tras décadas, solo para encontrar que su infancia no dejó rastro.",
+    "cover": "/book.png"
   }
 ]
