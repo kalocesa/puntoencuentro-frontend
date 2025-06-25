@@ -15,9 +15,10 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/seccion/:seccionId" element={<SectionPage />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/signin" element={<Login />} />
+          <Route path="/seccion/:seccionId" element={<SectionPage />} />
+          <Route path="/genero/:genreId" element={<SectionPage />} />
         </Routes>
         <Footer />
       </BookProvider>
