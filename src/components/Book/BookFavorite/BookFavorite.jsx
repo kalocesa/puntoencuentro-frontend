@@ -1,20 +1,23 @@
 import featuredBooks from "../../../data/genrebooks.json";
 import { useContext, useState } from "react";
 import { GenderContext } from "../../../contexts/GenderContext";
+import { BookContext } from "../../../contexts/BookContext";
 import BookModal from "../BookCard/BookModal/BookModal";
 
 function BookFavorite() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [liked, setLiked] = useState(false);
-  const [status, setStatus] = useState(null);
   const { selectedGender } = useContext(GenderContext);
-
   const genreString = (str) => str?.toLowerCase().replace(/\s/g, "");
+  const { likedBooks, toggleLike, bookStatus, updateStatus } =
+    useContext(BookContext);
 
   const book =
     featuredBooks.find(
       (book) => genreString(book.genre) === genreString(selectedGender)
     ) || featuredBooks.find((book) => book.genre === "Fantasía");
+
+  const liked = likedBooks[book.id] || false;
+  const currentStatus = bookStatus[book.id] || null;
 
   const handleDiscover = () => setModalOpen(true);
 
@@ -40,10 +43,10 @@ function BookFavorite() {
         <button
           onClick={handleDiscover}
           className={`w-20 md:w-32 py-1 rounded-full ml-3 text-sm md:text-lg mt-auto mb-6 md:mb-10 cursor-pointer ${
-            statusColors[status] || "bg-[#ff5400] hover:bg-[#ff5400]/30"
+            statusColors[currentStatus] || "bg-[#9e0059] hover:bg-rose-950"
           }`}
         >
-          {status || "Descubre"}
+          {currentStatus || "Descubre"}
         </button>
       </div>
 
@@ -51,10 +54,10 @@ function BookFavorite() {
         <BookModal
           book={book}
           liked={liked}
-          onToggleLike={() => setLiked(!liked)}
+          onToggleLike={() => toggleLike(book.id)}
           onClose={closeModal}
-          currentStatus={status}
-          onSelectStatus={(s) => setStatus(s)}
+          currentStatus={currentStatus}
+          onSelectStatus={(s) => updateStatus(book.id, s)}
         />
       )}
     </>
