@@ -1,0 +1,21 @@
+.login__title {
+  font-family: var(--title);
+}
+
+.login__label {
+  font-family: var(--subtitle);
+  font-size: 20px;
+}
+
+.login__input {
+  font-family: var(--text);
+  font-size: 16px;
+}
+
+.login__link {
+  font-family: var(--title);
+}
+
+.login__link-signin {
+  font-family: var(--text);
+}

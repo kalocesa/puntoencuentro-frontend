@@ -1,0 +1,21 @@
+.register__title {
+  font-family: var(--title);
+}
+
+.register__label {
+  font-family: var(--subtitle);
+  font-size: 20px;
+}
+
+.register__input {
+  font-family: var(--text);
+  font-size: 16px;
+}
+
+.register__link {
+  font-family: var(--title);
+}
+
+.register__link-signin {
+  font-family: var(--text);
+}
