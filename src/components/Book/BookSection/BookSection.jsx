@@ -1,12 +1,18 @@
 import { useContext } from "react";
 import { BookContext } from "../../../contexts/BookContext";
+import { GenderContext } from "../../../contexts/GenderContext";
 import BookGrid from "../BookGrid/BookGrid";
 import "../BookSection/BookSection.css";
 import { Link } from "react-router-dom";
 
 function BookSection({ title, filter, linkTo }) {
   const { books } = useContext(BookContext);
-  const filteredBooks = books.filter(filter).slice(0, 6);
+  const { selectedGender } = useContext(GenderContext);
+
+  const filteredBooks = books
+    .filter((book) => !selectedGender || book.genre === selectedGender)
+    .filter(filter)
+    .slice(0, 6);
 
   return (
     <section className="my-10">

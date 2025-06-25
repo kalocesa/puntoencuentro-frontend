@@ -7,17 +7,17 @@ function Home() {
       <Header />
       <BookSection
         title="Títulos"
-        filter={(book) => book.title.includes("Alas")} // o cualquier criterio
-        linkTo="/seccion/Títulos"
+        filter={(book) => book.title.toLowerCase().includes("")}
+        linkTo="/seccion/Titulos"
       />
       <BookSection
         title="Los más leídos"
-        filter={(book) => book.publisher.includes("Alfaguara")} // o cualquier criterio
-        linkTo="/seccion/Los más leídos"
+        filter={(book) => book.publisher.toLowerCase().includes("")}
+        linkTo="/seccion/Los%20mas%20leidos"
       />
       <BookSection
         title="Novedades"
-        filter={(book) => book.title.includes("La")} // o cualquier criterio
+        filter={(book) => book.title.toLowerCase().includes("")}
         linkTo="/seccion/Novedades"
       />
     </>
