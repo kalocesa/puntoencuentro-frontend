@@ -5,7 +5,7 @@ import whiteMenu from "@icons/menu-white.svg";
 import Menu from "./Menu/Menu.jsx";
 import SearchBar from "./SearchBar/SearchBar.jsx";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useClickOutside from "../../hooks/useClickOutside.js";
 
 function Navbar() {
@@ -13,9 +13,9 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef(null);
+  const location = useLocation();
   useClickOutside(menuRef, () => setIsMenuOpen(false));
 
-  /* Probable el scroll lo pase a header para que se active al ya no estar en esa sección, por el diseño responsivo */
   useEffect(() => {
     const target = document.getElementById("hero");
 
@@ -27,10 +27,10 @@ function Navbar() {
       const top = target.getBoundingClientRect().bottom;
       setScrolled(top <= 0);
     };
-
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location]);
 
   return (
     <nav
