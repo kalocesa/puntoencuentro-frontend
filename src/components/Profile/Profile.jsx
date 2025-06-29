@@ -1,4 +1,5 @@
 import "../Profile/Profile.css";
+import BookGrid from "../Book/BookGrid/BookGrid";
 import { BookContext } from "../../contexts/BookContext";
 import avatar from "@images/avatar2.png";
 import pencil from "@icons/pen.svg";
@@ -6,8 +7,8 @@ import user from "@icons/edit-profile.svg";
 import { useState, useContext } from "react";
 
 function Profile() {
-  const [activeStat, setActiveStat] = useState("");
-  const { books, countBooksByStatus, countLikedBooks, bookStatus } =
+  const [activeStat, setActiveStat] = useState("libros");
+  const { books, likedBooks, countBooksByStatus, countLikedBooks, bookStatus } =
     useContext(BookContext);
   const countMultipleStatuses = (statuses) => {
     return books.filter((book) => statuses.includes(bookStatus[book.id]))
@@ -20,6 +21,15 @@ function Profile() {
     leidos: countBooksByStatus("Leídos"),
     leyendo: countBooksByStatus("Leyendo"),
     porleer: countBooksByStatus("Leer"),
+  };
+
+  const filters = {
+    libros: (book) =>
+      ["Leídos", "Leyendo", "Leer"].includes(bookStatus[book.id]),
+    gustan: (book) => likedBooks[book.id],
+    leidos: (book) => bookStatus[book.id] === "Leídos",
+    leyendo: (book) => bookStatus[book.id] === "Leyendo",
+    porleer: (book) => bookStatus[book.id] === "Leer",
   };
 
   const stats = [
@@ -56,65 +66,77 @@ function Profile() {
   ];
 
   return (
-    <header className="mt-10 gap-8 p-6 profile__background-image">
-      <section className="bg-black/90 rounded-3xl mt-5 max-w-[980px] grid grid-col">
-        <div className="flex flex-col md:flex-row gap-5 p-3 m-auto">
-          <div className="relative group m-auto mt-3">
-            <img
-              src={avatar}
-              alt="Imagen del avatar del perfil"
-              className="object-cover bg-white rounded-full p-2 max-w-[200px]"
-            />
-            <button className="absolute inset-0 rounded-full bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+    <>
+      <header className="mt-10 gap-8 p-6 profile__background-image">
+        <section className="bg-black/90 rounded-3xl mt-5 max-w-[980px] grid grid-col">
+          <div className="flex flex-col md:flex-row gap-5 p-3 m-auto">
+            <div className="relative group m-auto mt-3">
               <img
-                src={pencil}
-                alt="icono de lápiz para cambiar el avatar del perfil"
-                className="mx-auto transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1"
+                src={avatar}
+                alt="Imagen del avatar del perfil"
+                className="object-cover bg-white rounded-full p-2 max-w-[200px]"
               />
-            </button>
-          </div>
-          <div className="my-auto">
-            <div className="flex items-baseline gap-2">
-              <p className="profile__title">Nombre:</p>
-              <p className="">Aquí va el nombre</p>
-              <button className="ml-auto self-end cursor-pointer w-8 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1">
+              <button className="absolute inset-0 rounded-full bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
                 <img
-                  src={user}
-                  alt="icono para editar el perfil del usuario"
-                  className="w-full"
+                  src={pencil}
+                  alt="icono de lápiz para cambiar el avatar del perfil"
+                  className="mx-auto transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1"
                 />
               </button>
             </div>
-            <div className="flex items-baseline gap-2">
-              <p className="profile__title">Correo eléctronico:</p>
-              <p>Aquí va el correo</p>
-            </div>
-            <div className="flex flex-col items-baseline">
-              <p className="profile__title">Acerca de mi:</p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Sapiente hic sunt quibusdam voluptates maiores totam, tempore
-                saepe ipsum rem dolores suscipit harum vel fuga molestiae
-                voluptatum dicta voluptas officia explicabo.
-              </p>
+            <div className="my-auto">
+              <div className="flex items-baseline gap-2">
+                <p className="profile__title">Nombre:</p>
+                <p className="">Aquí va el nombre</p>
+                <button className="ml-auto self-end cursor-pointer w-8 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1">
+                  <img
+                    src={user}
+                    alt="icono para editar el perfil del usuario"
+                    className="w-full"
+                  />
+                </button>
+              </div>
+              <div className="flex items-baseline gap-2">
+                <p className="profile__title">Correo eléctronico:</p>
+                <p>Aquí va el correo</p>
+              </div>
+              <div className="flex flex-col items-baseline">
+                <p className="profile__title">Acerca de mi:</p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Sapiente hic sunt quibusdam voluptates maiores totam, tempore
+                  saepe ipsum rem dolores suscipit harum vel fuga molestiae
+                  voluptatum dicta voluptas officia explicabo.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col md:flex-row p-5">
-          {stats.map((item) => (
-            <button
-              key={item.key}
-              onClick={() => setActiveStat(item.key)}
-              className={`profile__button w-full text-start p-5 rounded-full transition-all duration-300 cursor-pointer 
+          <div className="flex flex-col md:flex-row p-5">
+            {stats.map((item) => (
+              <button
+                key={item.key}
+                onClick={() => setActiveStat(item.key)}
+                className={`profile__button w-full text-start p-5 rounded-full transition-all duration-300 cursor-pointer 
     ${activeStat === item.key ? item.color : "bg-transparent"} 
     ${item.hover}`}
-            >
-              {item.label} {countByKey[item.key]}
-            </button>
-          ))}
-        </div>
-      </section>
-    </header>
+              >
+                {item.label} {countByKey[item.key]}
+              </button>
+            ))}
+          </div>
+        </section>
+      </header>
+      <main>
+        {activeStat && (
+          <section className="mt-10 p-6 w-full m-auto">
+            <h2 className="text-2xl md:text-3xl mb-4">
+              {stats.find((s) => s.key === activeStat)?.label}
+            </h2>
+            <BookGrid books={books.filter(filters[activeStat])} />
+          </section>
+        )}
+      </main>
+    </>
   );
 }
 
