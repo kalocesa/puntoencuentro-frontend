@@ -2,6 +2,7 @@ import Footer from "@components/Footer/Footer.jsx";
 import Navbar from "../Navbar/Navbar.jsx";
 import Home from "../Home/Home.jsx";
 import SectionPage from "../SectionPage/SectionPage.jsx";
+import Profile from "../Profile/Profile.jsx";
 import { Register } from "../Register/Register.jsx";
 import { Routes, Route } from "react-router-dom";
 import { GenderProvider } from "../../contexts/GenderContext";
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signin" element={<Login />} />
           <Route path="/seccion/:seccionId" element={<SectionPage />} />
           <Route path="/genero/:genreId" element={<SectionPage />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />
       </BookProvider>
