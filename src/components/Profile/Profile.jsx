@@ -1,11 +1,26 @@
 import "../Profile/Profile.css";
+import { BookContext } from "../../contexts/BookContext";
 import avatar from "@images/avatar2.png";
 import pencil from "@icons/pen.svg";
 import user from "@icons/edit-profile.svg";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 function Profile() {
   const [activeStat, setActiveStat] = useState("");
+  const { books, countBooksByStatus, countLikedBooks, bookStatus } =
+    useContext(BookContext);
+  const countMultipleStatuses = (statuses) => {
+    return books.filter((book) => statuses.includes(bookStatus[book.id]))
+      .length;
+  };
+
+  const countByKey = {
+    libros: countMultipleStatuses(["Leídos", "Leer", "Leyendo"]),
+    gustan: countLikedBooks(),
+    leidos: countBooksByStatus("Leídos"),
+    leyendo: countBooksByStatus("Leyendo"),
+    porleer: countBooksByStatus("Leer"),
+  };
 
   const stats = [
     {
@@ -94,7 +109,7 @@ function Profile() {
     ${activeStat === item.key ? item.color : "bg-transparent"} 
     ${item.hover}`}
             >
-              {item.label}
+              {item.label} {countByKey[item.key]}
             </button>
           ))}
         </div>

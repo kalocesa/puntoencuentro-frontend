@@ -30,6 +30,14 @@ export const BookProvider = ({ children }) => {
   const getBooksByStatus = (status) =>
     books.filter((book) => bookStatus[book.id] === status);
 
+  const countBooksByStatus = (status) => {
+    return books.filter((book) => bookStatus[book.id] === status).length;
+  };
+
+  const countLikedBooks = () => {
+    return books.filter((book) => likedBooks[book.id]).length;
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -40,6 +48,8 @@ export const BookProvider = ({ children }) => {
         updateStatus,
         likedBooksList,
         getBooksByStatus,
+        countBooksByStatus,
+        countLikedBooks,
       }}
     >
       {children}
