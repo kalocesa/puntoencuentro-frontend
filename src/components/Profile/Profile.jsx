@@ -1,12 +1,15 @@
 import "../Profile/Profile.css";
 import BookGrid from "../Book/BookGrid/BookGrid";
 import { BookContext } from "../../contexts/BookContext";
-import avatar from "@images/avatar2.png";
+import { UserContext } from "../../contexts/UserContext";
+import PopupAvatar from "../Popup/PopupAvatar";
 import pencil from "@icons/pen.svg";
-import user from "@icons/edit-profile.svg";
+import userIcon from "@icons/edit-profile.svg";
 import { useState, useContext } from "react";
 
 function Profile() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const { user, setUser } = useContext(UserContext);
   const [activeStat, setActiveStat] = useState("libros");
   const { books, likedBooks, countBooksByStatus, countLikedBooks, bookStatus } =
     useContext(BookContext);
@@ -72,11 +75,14 @@ function Profile() {
           <div className="flex flex-col md:flex-row gap-5 p-3 m-auto">
             <div className="relative group m-auto mt-3">
               <img
-                src={avatar}
+                src={user.avatar}
                 alt="Imagen del avatar del perfil"
                 className="object-cover bg-white rounded-full p-2 max-w-[200px]"
               />
-              <button className="absolute inset-0 rounded-full bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+              <button
+                onClick={() => setIsPopupOpen(true)}
+                className="absolute inset-0 rounded-full bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+              >
                 <img
                   src={pencil}
                   alt="icono de lápiz para cambiar el avatar del perfil"
@@ -90,7 +96,7 @@ function Profile() {
                 <p className="">Aquí va el nombre</p>
                 <button className="ml-auto self-end cursor-pointer w-8 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1">
                   <img
-                    src={user}
+                    src={userIcon}
                     alt="icono para editar el perfil del usuario"
                     className="w-full"
                   />
@@ -136,6 +142,16 @@ function Profile() {
           </section>
         )}
       </main>
+      {isPopupOpen && (
+        <PopupAvatar
+          isOpen={isPopupOpen}
+          onClose={() => setIsPopupOpen(false)}
+          currentAvatar={user.avatar}
+          onSave={(newAvatar) =>
+            setUser((prev) => ({ ...prev, avatar: newAvatar }))
+          }
+        />
+      )}
     </>
   );
 }

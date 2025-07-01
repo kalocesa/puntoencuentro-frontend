@@ -19,7 +19,7 @@ function BookModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-black rounded-lg shadow-2xl shadow-stone-950 max-w-[550px] p-6 relative"
+        className="bg-stone-950 rounded-lg shadow-2xl shadow-stone-950 max-w-[550px] p-6 relative"
       >
         <button
           onClick={onClose}
