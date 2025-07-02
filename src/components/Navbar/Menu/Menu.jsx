@@ -15,13 +15,13 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
     <div ref={menuRef}>
       {isLoggedIn ? (
         <>
-          <div className="flex justify-evenly items-center gap-3 mb-2">
+          <div className="flex items-center gap-3 mb-2">
             <img
               src={user.avatar}
               alt="avatar del usuario"
               className="w-10 h-10 rounded-full border-2 border-white p-1 rounded-full"
             />
-            <p className="text-m">Nombre del usuario</p>
+            <p className="text-m">{user.name}</p>
           </div>
           <div className="flex flex-col">
             {/* Probable tenga que cambiar el to por un OnClick, investigar */}
