@@ -140,8 +140,8 @@ function Profile() {
       </header>
       <main>
         {activeStat && (
-          <section className="mt-10 p-6 w-full m-auto">
-            <h2 className="text-2xl md:text-3xl mb-2 ml-5">
+          <section className="mt-10 max-w-[1680px] mx-auto px-5 md:px-10">
+            <h2 className="text-[30px] md:text-[50px] mb-3 md:mb-6 profile__main-title">
               {stats.find((s) => s.key === activeStat)?.label}
             </h2>
             <BookGrid books={books.filter(filters[activeStat])} />

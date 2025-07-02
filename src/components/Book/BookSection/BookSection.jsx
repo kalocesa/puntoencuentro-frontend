@@ -15,13 +15,13 @@ function BookSection({ title, filter, linkTo }) {
     .slice(0, 6);
 
   return (
-    <section className="my-10">
-      <div className="flex justify-between text-center my-4 px-4 items-end">
-        <h2 className="text-2xl md:text-3xl ml-5 bookSection__title">
+    <section className="my-10 px-5 md:px-10">
+      <div className="flex justify-between items-baseline max-w-[1680px] mx-auto">
+        <h2 className="md:text-[50px] text-[30px] bookSection__title">
           {title}
         </h2>
         <Link to={linkTo}>
-          <button className="mr-5 hover:underline cursor-pointer">
+          <button className="hover:underline cursor-pointer text-sm md:text-xl">
             Ver más
           </button>
         </Link>

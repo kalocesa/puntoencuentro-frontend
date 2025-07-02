@@ -10,12 +10,12 @@ function BookCard({ book, onDiscover, liked, onToggleLike, currentStatus }) {
 
   return (
     <>
-      <article className="w-full rounded-lg bg-white flex flex-col">
+      <article className="w-full rounded-lg bg-white flex flex-col border">
         <figure className="mb-1">
           <img
             src={book.cover}
             alt={`Portada de ${book.title}`}
-            className="w-full object-cover rounded-t-lg cursor-pointer"
+            className="w-full h-[200px] object-cover rounded-t-lg cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               onDiscover(book);
