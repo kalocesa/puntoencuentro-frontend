@@ -3,6 +3,8 @@ import like from "@icons/like.svg";
 import dislike from "@icons/dislike.svg";
 import "../BookModal/BookModal.css";
 import SaveDropdown from "../SaveDropDown/SaveDropDown";
+import { useRef } from "react";
+import useOutsideClick from "../../../../hooks/useClickOutside";
 
 function BookModal({
   book,
@@ -12,13 +14,13 @@ function BookModal({
   currentStatus,
   onSelectStatus,
 }) {
+  const modalRef = useRef();
+  useOutsideClick(modalRef, onClose);
+
   return (
-    <div
-      onClick={onClose}
-      className="fixed inset-0 bg-stone-950/50 flex items-center justify-center z-50"
-    >
+    <div className="fixed inset-0 bg-stone-950/50 flex items-center justify-center z-50">
       <div
-        onClick={(e) => e.stopPropagation()}
+        ref={modalRef}
         className="bg-stone-950 rounded-lg shadow-2xl shadow-stone-950 max-w-[550px] p-6 relative"
       >
         <button

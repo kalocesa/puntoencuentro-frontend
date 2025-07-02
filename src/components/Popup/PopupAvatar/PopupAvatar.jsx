@@ -9,7 +9,9 @@ import avatar6 from "@images/avatar6.png";
 import avatar7 from "@images/avatar7.png";
 import avatar8 from "@images/avatar8.png";
 import avatar9 from "@images/avatar9.png";
-import "../Popup/PopupAvatar.css";
+import "../PopupAvatar/PopupAvatar.css";
+import { useRef } from "react";
+import useOutsideClick from "../../../hooks/useClickOutside";
 
 function PopupAvatar({ isOpen, onClose, currentAvatar, onSave }) {
   const [selectedAvatar, setSelectedAvatar] = useState(currentAvatar);
@@ -24,12 +26,17 @@ function PopupAvatar({ isOpen, onClose, currentAvatar, onSave }) {
     avatar8,
     avatar9,
   ];
+  const modalRef = useRef();
+  useOutsideClick(modalRef, onClose);
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-stone-950/50 flex items-center justify-center z-50">
-      <div className="bg-stone-950 rounded-3xl p-6 w-full max-w-md relative">
+      <div
+        ref={modalRef}
+        className="bg-stone-950 rounded-3xl p-6 w-full max-w-md relative"
+      >
         <h2 className="text-3xl mb-6 text-center popup__title">
           Selecciona tu avatar
         </h2>

@@ -9,9 +9,17 @@ export default function useOutsideClick(ref, onClose) {
       }
     }
 
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    }
+
     document.addEventListener("click", handleClick);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.addEventListener("click", handleClick);
+      document.removeEventListener("click", handleClick);
+      document.removeEventListener("keydown", handleClick);
     };
   }, [ref, onClose]);
 }

@@ -2,7 +2,7 @@ import "../Profile/Profile.css";
 import BookGrid from "../Book/BookGrid/BookGrid";
 import { BookContext } from "../../contexts/BookContext";
 import { UserContext } from "../../contexts/UserContext";
-import PopupAvatar from "../Popup/PopupAvatar";
+import PopupAvatar from "../Popup/PopupAvatar/PopupAvatar";
 import pencil from "@icons/pen.svg";
 import userIcon from "@icons/edit-profile.svg";
 import { useState, useContext } from "react";
@@ -38,31 +38,31 @@ function Profile() {
   const stats = [
     {
       key: "libros",
-      label: "Libros:",
+      label: "Libros",
       color: "bg-[#390099]",
       hover: "hover:bg-[#390099]/30",
     },
     {
       key: "gustan",
-      label: "Me gustan:",
+      label: "Me gustan",
       color: "bg-[#9e0059]",
       hover: "hover:bg-[#9e0059]/30",
     },
     {
       key: "leidos",
-      label: "Leídos:",
+      label: "Leídos",
       color: "bg-[#ff0054]",
       hover: "hover:bg-[#ff0054]/30",
     },
     {
       key: "leyendo",
-      label: "Leyendo:",
+      label: "Leyendo",
       color: "bg-[#ff5400]",
       hover: "hover:bg-[#ff5400]/30",
     },
     {
       key: "porleer",
-      label: "Por leer:",
+      label: "Por leer",
       color: "bg-[#ffbd00]",
       hover: "hover:bg-[#ffbd00]/30",
     },
@@ -80,7 +80,10 @@ function Profile() {
                 className="object-cover bg-white rounded-full p-2 max-w-[200px]"
               />
               <button
-                onClick={() => setIsPopupOpen(true)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPopupOpen(true);
+                }}
                 className="absolute inset-0 rounded-full bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
               >
                 <img
@@ -94,7 +97,7 @@ function Profile() {
               <div className="flex items-baseline gap-2">
                 <p className="profile__title">Nombre:</p>
                 <p className="">Aquí va el nombre</p>
-                <button className="ml-auto self-end cursor-pointer w-8 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1">
+                <button className="ml-auto mr-2 self-end cursor-pointer w-8 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1">
                   <img
                     src={userIcon}
                     alt="icono para editar el perfil del usuario"
@@ -122,7 +125,7 @@ function Profile() {
               <button
                 key={item.key}
                 onClick={() => setActiveStat(item.key)}
-                className={`profile__button w-full text-start p-5 rounded-full transition-all duration-300 cursor-pointer 
+                className={`font-semibold text-start m-2 p-5 rounded-2xl transition-all duration-300 cursor-pointer 
     ${activeStat === item.key ? item.color : "bg-transparent"} 
     ${item.hover}`}
               >
@@ -135,7 +138,7 @@ function Profile() {
       <main>
         {activeStat && (
           <section className="mt-10 p-6 w-full m-auto">
-            <h2 className="text-2xl md:text-3xl mb-4">
+            <h2 className="text-2xl md:text-3xl mb-2 ml-5">
               {stats.find((s) => s.key === activeStat)?.label}
             </h2>
             <BookGrid books={books.filter(filters[activeStat])} />

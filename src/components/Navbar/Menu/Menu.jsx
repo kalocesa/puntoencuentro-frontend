@@ -2,12 +2,14 @@ import avatar from "@images/avatar2.png";
 import Gender from "./Gender/Gender.jsx";
 import { Link } from "react-router-dom";
 import useClickOutside from "../../../hooks/useClickOutside.js";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext.jsx";
 
 function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
   /* Revisar el isLoggedIn para verificar la autenticación del inicio de sesión, cerrar sesión y registrarse */
   const menuRef = useRef(null);
   useClickOutside(menuRef, () => setIsMenuOpen(false));
+  const { user } = useContext(UserContext);
 
   return (
     <div ref={menuRef}>
@@ -15,9 +17,9 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
         <>
           <div className="flex justify-evenly items-center gap-3">
             <img
-              src={avatar}
+              src={user.avatar}
               alt="avatar del usuario"
-              className="w-10 h-10 rounded-full border-2 border-white rounded-full"
+              className="w-10 h-10 rounded-full border-2 border-white p-1 rounded-full"
             />
             <p className="text-m">Nombre del usuario</p>
           </div>
