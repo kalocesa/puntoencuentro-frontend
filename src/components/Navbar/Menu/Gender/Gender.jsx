@@ -2,12 +2,14 @@ import { useState, useContext, useRef } from "react";
 import { GenderContext } from "../../../../contexts/GenderContext";
 import useOutsideClick from "../../../../hooks/useClickOutside";
 import arrow from "@icons/Arrow-gender.svg";
+import { useNavigate } from "react-router-dom";
 
 function Gender({ setIsMenuOpen }) {
   const [open, setOpen] = useState(false);
   const { setSelectedGender } = useContext(GenderContext);
   const genderRef = useRef(null);
   useOutsideClick(genderRef, () => setOpen(false));
+  const navigate = useNavigate();
 
   const genders = [
     "Ficción",
@@ -24,6 +26,7 @@ function Gender({ setIsMenuOpen }) {
     setSelectedGender(gender);
     setOpen(false);
     setIsMenuOpen(false);
+    navigate("/");
   };
 
   return (
