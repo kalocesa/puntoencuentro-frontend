@@ -3,12 +3,14 @@ import BookGrid from "../Book/BookGrid/BookGrid";
 import { BookContext } from "../../contexts/BookContext";
 import { UserContext } from "../../contexts/UserContext";
 import PopupAvatar from "../Popup/PopupAvatar/PopupAvatar";
+import PopupUser from "../Popup/PopupUser/PopupUser";
 import pencil from "@icons/pen.svg";
 import userIcon from "@icons/edit-profile.svg";
 import { useState, useContext } from "react";
 
 function Profile() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPopupUserOpen, setIsPopupUserOpen] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const [activeStat, setActiveStat] = useState("libros");
   const { books, likedBooks, countBooksByStatus, countLikedBooks, bookStatus } =
@@ -96,8 +98,14 @@ function Profile() {
             <div className="my-auto">
               <div className="flex items-baseline gap-2">
                 <p className="profile__title">Nombre:</p>
-                <p className="">Aquí va el nombre</p>
-                <button className="ml-auto mr-2 self-end cursor-pointer w-8 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1">
+                <p>{user.name}</p>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsPopupUserOpen(true);
+                  }}
+                  className="ml-auto mr-2 self-end cursor-pointer w-8 transition-transform duration-300 ease-in-out hover:scale-125 hover:-translate-y-1"
+                >
                   <img
                     src={userIcon}
                     alt="icono para editar el perfil del usuario"
@@ -107,16 +115,11 @@ function Profile() {
               </div>
               <div className="flex items-baseline gap-2">
                 <p className="profile__title">Correo eléctronico:</p>
-                <p>Aquí va el correo</p>
+                <p>{user.email}</p>
               </div>
               <div className="flex flex-col items-baseline">
                 <p className="profile__title">Acerca de mi:</p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Sapiente hic sunt quibusdam voluptates maiores totam, tempore
-                  saepe ipsum rem dolores suscipit harum vel fuga molestiae
-                  voluptatum dicta voluptas officia explicabo.
-                </p>
+                <p>{user.about}</p>
               </div>
             </div>
           </div>
@@ -153,6 +156,12 @@ function Profile() {
           onSave={(newAvatar) =>
             setUser((prev) => ({ ...prev, avatar: newAvatar }))
           }
+        />
+      )}
+      {isPopupUserOpen && (
+        <PopupUser
+          isOpen={isPopupUserOpen}
+          onClose={() => setIsPopupUserOpen(false)}
         />
       )}
     </>

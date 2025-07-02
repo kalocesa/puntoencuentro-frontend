@@ -5,10 +5,10 @@ export const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState({
-    name: "",
-    email: "",
+    name: "Aquí va tu nombre",
+    email: "example@example.com",
     avatar: avatar,
-    about: "",
+    about: "Agrega una pequeñe descripcion sobre ti, queremos conocerte!",
   });
 
   const [loading, setLoading] = useState(true);

@@ -15,7 +15,7 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
     <div ref={menuRef}>
       {isLoggedIn ? (
         <>
-          <div className="flex justify-evenly items-center gap-3">
+          <div className="flex justify-evenly items-center gap-3 mb-2">
             <img
               src={user.avatar}
               alt="avatar del usuario"
