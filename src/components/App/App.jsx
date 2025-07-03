@@ -4,12 +4,13 @@ import Home from "../Home/Home.jsx";
 import SectionPage from "../SectionPage/SectionPage.jsx";
 import Profile from "../Profile/Profile.jsx";
 import { Register } from "../Register/Register.jsx";
+import Login from "../Login/Login.jsx";
+import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import { registrarUsuario, iniciarSesion } from "../../utils/auth.js";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { GenderProvider } from "../../contexts/GenderContext";
 import { BookProvider } from "../../contexts/BookContext.jsx";
 import { UserProvider } from "../../contexts/UserContext.jsx";
-import Login from "../Login/Login.jsx";
 
 function App() {
   const navigate = useNavigate();
@@ -42,7 +43,15 @@ function App() {
         <UserProvider>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Navigate to="/signin" />} />
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
             <Route
               path="/signup"
               element={<Register handleRegister={handleRegister} />}
@@ -51,9 +60,30 @@ function App() {
               path="/signin"
               element={<Login handleLogin={handleLogin} />}
             />
-            <Route path="/seccion/:seccionId" element={<SectionPage />} />
-            <Route path="/genero/:genreId" element={<SectionPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/seccion/:seccionId"
+              element={
+                <PrivateRoute>
+                  <SectionPage />
+                </PrivateRoute>
+              }
+            />{" "}
+            <Route
+              path="/genero/:genreId"
+              element={
+                <PrivateRoute>
+                  <SectionPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
           </Routes>
           <Footer />
         </UserProvider>
