@@ -1,0 +1,16 @@
+.profile__background-image {
+  background-image: url("../../images/back-black.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile__title {
+  font-family: var(--subtitle);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.profile__main-title {
+  font-family: var(--subtitle);
+  font-weight: 600;
+}

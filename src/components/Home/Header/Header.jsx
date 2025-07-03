@@ -1,7 +1,7 @@
 import fictionView from "@images/back-ficcion.png";
 import nonFictionView from "@images/back-noficcion.png";
 import horrorView from "@images/back-terror.png";
-import fantasyView from "@images/sauron.png";
+import fantasyView from "@images/anillos.png";
 import romanceView from "@images/back-romance.png";
 import mysteryView from "@images/back-misterio.png";
 import sciFiView from "@images/back-cienciaficcion.png";
@@ -24,7 +24,7 @@ function Header() {
   };
 
   return (
-    <header className="relative h-[500px] md:h-[800px] overflow-hidden">
+    <header className="relative h-[500px] md:h-[1000px] overflow-hidden">
       {/* Imagen de fondo */}
       <img
         src={genreViews[selectedGender] || fantasyView}
@@ -34,7 +34,7 @@ function Header() {
       />
 
       {/* Contenido encima */}
-      <div className="relative top-65  md:top-115">
+      <div className="relative top-65  md:top-170">
         <HeroOverlay />
       </div>
     </header>

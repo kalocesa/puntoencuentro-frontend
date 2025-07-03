@@ -10,13 +10,16 @@ function BookCard({ book, onDiscover, liked, onToggleLike, currentStatus }) {
 
   return (
     <>
-      <article className="w-full rounded-lg bg-white flex flex-col">
+      <article className="w-full rounded-lg bg-white flex flex-col border">
         <figure className="mb-1">
           <img
             src={book.cover}
             alt={`Portada de ${book.title}`}
-            className="w-full object-cover rounded-t-lg cursor-pointer"
-            onClick={() => onDiscover(book)}
+            className="w-full h-[200px] object-cover rounded-t-lg cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDiscover(book);
+            }}
           />
           <figcaption className="sr-only">Portada del libro</figcaption>
         </figure>
@@ -32,7 +35,10 @@ function BookCard({ book, onDiscover, liked, onToggleLike, currentStatus }) {
 
         <footer className="py-2 grid grid-col-2">
           <button
-            onClick={() => onDiscover(book)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDiscover(book);
+            }}
             className={`ml-2 px-2 py-1 text-sm rounded-full cursor-pointer col-1 ${
               statusColors[currentStatus] || "bg-[#9E0059] hover:bg-rose-950"
             }`}
