@@ -2,11 +2,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import background from "@images/back-black.png";
 import "../Register/Register.css";
+import useAuthStatus from "../../utils/useAuthStatus";
 
 export const Register = ({ handleRegister }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const usuarioActual = useAuthStatus();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (usuarioActual) {
+      navigate("/profile"); // o la ruta que prefieras
+    }
+  }, [usuarioActual]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
