@@ -6,6 +6,7 @@ import Profile from "../Profile/Profile.jsx";
 import { Register } from "../Register/Register.jsx";
 import Login from "../Login/Login.jsx";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
+import InitialRedirect from "../InitialRedirect/InitialRedirect.jsx";
 import { registrarUsuario, iniciarSesion } from "../../utils/auth.js";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { GenderProvider } from "../../contexts/GenderContext";
@@ -43,7 +44,7 @@ function App() {
         <UserProvider>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Navigate to="/signin" />} />
+            <Route path="/" element={<InitialRedirect />} />
             <Route
               path="/home"
               element={

@@ -11,7 +11,7 @@ import { useState, useContext } from "react";
 function Profile() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isPopupUserOpen, setIsPopupUserOpen] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, loading } = useContext(UserContext);
   const [activeStat, setActiveStat] = useState("libros");
   const { books, likedBooks, countBooksByStatus, countLikedBooks, bookStatus } =
     useContext(BookContext);
@@ -69,6 +69,10 @@ function Profile() {
       hover: "hover:bg-[#ffbd00]/30",
     },
   ];
+
+  if (loading || !user) {
+    return null; // o un loader lindo
+  }
 
   return (
     <>
