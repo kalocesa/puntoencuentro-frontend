@@ -26,7 +26,7 @@ function Gender({ setIsMenuOpen }) {
     setSelectedGender(gender);
     setOpen(false);
     setIsMenuOpen(false);
-    navigate("/");
+    navigate("/home");
   };
 
   return (

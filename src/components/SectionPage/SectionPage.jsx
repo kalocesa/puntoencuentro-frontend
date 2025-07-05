@@ -48,7 +48,7 @@ function SectionPage() {
         <h2 className="md:text-[50px] text-[30px] ml-2 section-page__title">
           {labels[seccionId]}
         </h2>
-        <Link to={"/"}>
+        <Link to={"/home"}>
           <img
             src={arrow}
             alt="flecha blanca para regresar al menu principal"

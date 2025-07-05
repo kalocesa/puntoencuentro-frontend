@@ -71,15 +71,15 @@ function Profile() {
   ];
 
   if (loading || !user) {
-    return null; // o un loader lindo
+    return null;
   }
 
   return (
     <>
       <header className="mt-10 gap-8 p-6 profile__background-image">
         <section className="bg-black/90 rounded-3xl mt-5 max-w-[980px] grid grid-col">
-          <div className="flex flex-col md:flex-row gap-5 p-3 m-auto">
-            <div className="relative group m-auto mt-3">
+          <div className="flex flex-col md:flex-row gap-5 w-full p-3 mr-auto">
+            <div className="relative group m-auto md:m-0">
               <img
                 src={user.avatar}
                 alt="Imagen del avatar del perfil"
@@ -99,7 +99,7 @@ function Profile() {
                 />
               </button>
             </div>
-            <div className="my-auto">
+            <div className="my-auto w-full">
               <div className="flex items-baseline gap-2">
                 <p className="profile__title">Nombre:</p>
                 <p>{user.name}</p>
@@ -127,12 +127,12 @@ function Profile() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row p-5">
+          <div className="flex flex-col md:flex-row p-5 justify-between">
             {stats.map((item) => (
               <button
                 key={item.key}
                 onClick={() => setActiveStat(item.key)}
-                className={`font-semibold text-start m-2 p-5 rounded-2xl transition-all duration-300 cursor-pointer 
+                className={`w-full font-semibold text-xl md:text-lg text-start md:text-center m-2 p-2  rounded-2xl transition-all duration-300 cursor-pointer 
     ${activeStat === item.key ? item.color : "bg-transparent"} 
     ${item.hover}`}
               >

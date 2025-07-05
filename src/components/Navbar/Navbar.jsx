@@ -54,7 +54,7 @@ function Navbar() {
     >
       <div className="flex items-center gap-2 text-xl font-bold text-indigo-600">
         <Link
-          to="/"
+          to="/home"
           onClick={() => {
             setSelectedGender("");
           }}
