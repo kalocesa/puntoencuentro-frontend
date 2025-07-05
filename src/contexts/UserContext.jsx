@@ -1,28 +1,28 @@
 import { createContext, useState, useEffect } from "react";
-import avatar from "@images/avatar1.png";
+import avatarDefault from "@images/avatar1.png";
+import { getUserData } from "../utils/localStorageUser";
 import useAuthStatus from "../utils/useAuthStatus";
 
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const { currentUser, cargando } = useAuthStatus();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!cargando) {
       if (currentUser) {
-        const storedData = JSON.parse(localStorage.getItem("userData")) || {};
+        const localData = getUserData(currentUser.uid);
         setUser({
-          name: storedData.name || "Aquí va tu nombre",
+          ...localData,
           email: currentUser.email,
-          avatar: storedData.avatar || avatar,
-          about: storedData.about || "Agrega una pequeñe descripcion sobre ti",
           uid: currentUser.uid,
         });
       } else {
-        setUser(null); // <- limpia el contexto si no hay usuario
+        setUser(null);
       }
+
       setLoading(false);
     }
   }, [cargando, currentUser]);

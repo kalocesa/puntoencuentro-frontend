@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import useClickOutside from "../../../hooks/useClickOutside.js";
 import { useRef, useContext } from "react";
 import { UserContext } from "../../../contexts/UserContext.jsx";
-import { cerrarSesion } from "../../../utils/auth.js";
+import { logoutUser } from "../../../utils/auth.js";
+import { clearUserData } from "../../../utils/localStorageUser.js";
 
 function Menu({ setIsMenuOpen, isLoggedIn }) {
   const menuRef = useRef(null);
@@ -12,7 +13,8 @@ function Menu({ setIsMenuOpen, isLoggedIn }) {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await cerrarSesion();
+    await logoutUser();
+    await clearUserData();
     setIsMenuOpen(false);
     navigate("/signin");
   };

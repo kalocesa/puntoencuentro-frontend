@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../../contexts/UserContext";
+import { updateUserData } from "../../../utils/localStorageUser";
 import close from "@icons/close.svg";
 import avatar1 from "@images/avatar1.png";
 import avatar2 from "@images/avatar2.png";
@@ -15,6 +17,8 @@ import useOutsideClick from "../../../hooks/useClickOutside";
 
 function PopupAvatar({ isOpen, onClose, currentAvatar, onSave }) {
   const [selectedAvatar, setSelectedAvatar] = useState(currentAvatar);
+  const { user, setUser } = useContext(UserContext);
+
   const avatarOptions = [
     avatar1,
     avatar2,
@@ -70,10 +74,15 @@ function PopupAvatar({ isOpen, onClose, currentAvatar, onSave }) {
           </button>
           <button
             onClick={() => {
-              onSave(selectedAvatar);
+              updateUserData(user.uid, { avatar: selectedAvatar });
+              setUser((prev) => ({
+                ...prev,
+                avatar: selectedAvatar,
+              }));
+              onSave(selectedAvatar); // si lo usas para re-render externo
               onClose();
             }}
-            className=" w-full px-4 py-2 bg-[#9e0059] text-xl cursor-pointer rounded-full hover:bg-[#9e0059]/30"
+            className="w-full px-4 py-2 bg-[#9e0059] text-xl cursor-pointer rounded-full hover:bg-[#9e0059]/30"
           >
             Guardar
           </button>

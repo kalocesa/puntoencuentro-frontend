@@ -9,7 +9,7 @@ export default function PrivateRoute({ children }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoaderDelay(false);
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);

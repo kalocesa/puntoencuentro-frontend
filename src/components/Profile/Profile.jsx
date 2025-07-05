@@ -19,6 +19,7 @@ function Profile() {
     return books.filter((book) => statuses.includes(bookStatus[book.id]))
       .length;
   };
+  console.log("User desde el contexto:", user);
 
   const countByKey = {
     libros: countMultipleStatuses(["Leídos", "Leer", "Leyendo"]),
