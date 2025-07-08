@@ -5,4 +5,7 @@ export const mapGoogleBook = (book) => ({
   publisher: book.volumeInfo.publisher || "Editorial desconocida",
   genre: book.volumeInfo.categories?.[0] || "Sin género",
   image: book.volumeInfo.imageLinks?.thumbnail || "",
+  pageCount: book.volumeInfo.pageCount || 0,
+  publishedDate: book.volumeInfo.publishedDate || "Fecha desconocida",
+  description: book.volumeInfo.description || "Sin sinopsis disponible",
 });

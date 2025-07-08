@@ -16,7 +16,6 @@ function BookModal({
 }) {
   const modalRef = useRef();
   useOutsideClick(modalRef, onClose);
-
   return (
     <div className="fixed inset-0 bg-stone-950/50 flex items-center justify-center z-50">
       <div
@@ -38,7 +37,7 @@ function BookModal({
           {/* Primera columna */}
           <div className="justify-self-start md:justify-self-center mb-4 bg-stone-50 rounded-lg p-2">
             <img
-              src={book.cover}
+              src={book.image}
               alt={`Portada de ${book.title}`}
               className="w-32 md:w-50 mx-auto object-cover rounded-lg"
             />

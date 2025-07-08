@@ -14,7 +14,7 @@ export const BookProvider = ({ children }) => {
   // 🔄 Cargar libros desde Google Books al cambiar de género
   useEffect(() => {
     const fetchBooks = async () => {
-      const genre = selectedGender || "Ficción"; // valor por defecto
+      const genre = selectedGender || "Fantasía"; // valor por defecto
       const rawBooks = await getBooksByGenre(genre);
       const mapped = rawBooks.map(mapGoogleBook);
       setBooks(mapped);
