@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { getBooksByGenre } from "../utils/api/googleBooks";
-import { mapGoogleBook } from "../utils/mapGoogleBook";
+import { fetchGoogleBooks } from "../utils/api/googleBooks";
 import { GenderContext } from "./GenderContext";
 
 export const BookContext = createContext();
@@ -9,17 +8,38 @@ export const BookProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
   const [likedBooks, setLikedBooks] = useState({});
   const [bookStatus, setBookStatus] = useState({});
+  const [currentPage, setCurrentPage] = useState(0);
   const { selectedGender } = useContext(GenderContext);
 
-  // 🔄 Cargar libros desde Google Books al cambiar de género
+  const showMoreBooks = async () => {
+    const queryGenre = selectedGender?.toLowerCase() || "fantasy";
+    const newBooks = await fetchGoogleBooks(queryGenre, currentPage * 20, 20);
+
+    setBooks((prevBooks) => {
+      const existingIds = new Set(prevBooks.map((book) => book.id));
+      const filteredBooks = newBooks.filter(
+        (book) => !existingIds.has(book.id)
+      );
+
+      setCurrentPage((prevPage) => prevPage + 1);
+      return [...prevBooks, ...filteredBooks];
+    });
+  };
+
   useEffect(() => {
-    const fetchBooks = async () => {
-      const genre = selectedGender || "Fantasía"; // valor por defecto
-      const rawBooks = await getBooksByGenre(genre);
-      const mapped = rawBooks.map(mapGoogleBook);
-      setBooks(mapped);
+    const resetAndFetch = async () => {
+      setBooks([]);
+      setCurrentPage(0);
+
+      const initialBooks = await fetchGoogleBooks(
+        selectedGender?.toLowerCase() || "fantasy",
+        0,
+        20
+      );
+      setBooks(initialBooks);
     };
-    fetchBooks();
+
+    resetAndFetch();
   }, [selectedGender]);
 
   // 🧠 Cargar likes y status desde localStorage
@@ -63,6 +83,7 @@ export const BookProvider = ({ children }) => {
         getBooksByStatus,
         countBooksByStatus,
         countLikedBooks,
+        showMoreBooks,
       }}
     >
       {children}

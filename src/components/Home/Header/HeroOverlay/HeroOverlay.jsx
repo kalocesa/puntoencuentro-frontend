@@ -5,6 +5,16 @@ import BookFavorite from "../../../Book/BookFavorite/BookFavorite";
 
 function HeroOverlay() {
   const { selectedGender } = useContext(GenderContext);
+  const labelMap = {
+    Fiction: "Ficción",
+    Nonfiction: "No ficción",
+    Horror: "Terror",
+    Fantasy: "Fantasía",
+    Romance: "Romance",
+    Mystery: "Misterio",
+    "Science Fiction": "Ciencia ficción",
+    Drama: "Drama",
+  };
 
   return (
     <section
@@ -14,7 +24,7 @@ function HeroOverlay() {
       <h1 className="md:text-6xl text-2xl pt-0 pl-5 md:pl-20 self-center hero-overlay__title">
         {selectedGender === "" || selectedGender === null
           ? "Junio es pura fantasía"
-          : `${selectedGender}`}
+          : `${labelMap[selectedGender] || selectedGender}`}
       </h1>
 
       <div className="flex flex-row p-5 md:p-15 justify-start md:justify-center">

@@ -1,7 +1,6 @@
 import Footer from "@components/Footer/Footer.jsx";
 import Navbar from "../Navbar/Navbar.jsx";
 import Home from "../Home/Home.jsx";
-import SectionPage from "../SectionPage/SectionPage.jsx";
 import Profile from "../Profile/Profile.jsx";
 import { Register } from "../Register/Register.jsx";
 import Login from "../Login/Login.jsx";
@@ -89,22 +88,6 @@ function App() {
             <Route
               path="/signin"
               element={<Login handleLogin={handleLogin} />}
-            />
-            <Route
-              path="/seccion/:seccionId"
-              element={
-                <PrivateRoute>
-                  <SectionPage />
-                </PrivateRoute>
-              }
-            />{" "}
-            <Route
-              path="/genero/:genreId"
-              element={
-                <PrivateRoute>
-                  <SectionPage />
-                </PrivateRoute>
-              }
             />
             <Route
               path="/profile"

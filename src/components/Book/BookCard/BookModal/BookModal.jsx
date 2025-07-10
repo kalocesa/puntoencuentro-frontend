@@ -20,7 +20,7 @@ function BookModal({
     <div className="fixed inset-0 bg-stone-950/50 flex items-center justify-center z-50">
       <div
         ref={modalRef}
-        className="bg-stone-950 rounded-lg shadow-2xl shadow-stone-950 max-w-[550px] p-6 relative"
+        className="bg-stone-950 max-w-[950px] rounded-lg shadow-2xl shadow-stone-950 w-full p-6 relative"
       >
         <button
           onClick={onClose}
@@ -34,20 +34,19 @@ function BookModal({
         </button>
         {/* Aquí empieza el grid */}
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Primera columna */}
-          <div className="justify-self-start md:justify-self-center mb-4 bg-stone-50 rounded-lg p-2">
+          {/* Columna 1 */}
+          <div className="bg-stone-50 rounded-lg p-2 items-center max-h-[360px] w-[150px] md:w-2/4 m-auto flex flex-col">
             <img
               src={book.image}
               alt={`Portada de ${book.title}`}
-              className="w-32 md:w-50 mx-auto object-cover rounded-lg"
+              className="w-32 md:w-50 md:min-h-[300px] md:max-h-[301px] mx-auto object-cover rounded-lg"
             />
-            {/* grid de los botones guardar y like */}
             <div className="grid grid-cols-2 mt-2 max-w-[125px] md:max-w-[200px]">
+              {/* Botones */}
               <SaveDropdown
                 currentStatus={currentStatus}
                 onSelectStatus={onSelectStatus}
               />
-
               <button
                 onClick={onToggleLike}
                 className="w-7 cursor-pointer ml-auto transition-transform hover:scale-115"
@@ -55,18 +54,15 @@ function BookModal({
               >
                 <img
                   src={liked ? like : dislike}
-                  alt={
-                    liked
-                      ? "Icono de favorito activo"
-                      : "Icono de favorito inactivo"
-                  }
+                  alt="Favorito"
                   className="w-full"
                 />
               </button>
             </div>
           </div>
-          {/* Segunda columna */}
-          <div className="min-w-[250px]">
+
+          {/* Columna 2 */}
+          <div className="mt-4 md:mt-5 h-[350px] overflow-y-auto pr-2">
             <p className="bookmodal__property font-bold">
               Título:
               <span className="bookmodal__property-span font-light">

@@ -119,7 +119,7 @@ function Profile() {
                 </button>
               </div>
               <div className="flex items-baseline gap-2">
-                <p className="profile__title">Correo eléctronico:</p>
+                <p className="profile__title">Correo:</p>
                 <p>{user.email}</p>
               </div>
               <div className="flex flex-col items-baseline">
@@ -146,7 +146,7 @@ function Profile() {
       <main>
         {activeStat && (
           <section className="mt-10 max-w-[1680px] mx-auto px-5 md:px-10">
-            <h2 className="text-[30px] md:text-[50px] mb-3 md:mb-6 profile__main-title">
+            <h2 className="text-[30px] md:text-[50px] profile__main-title">
               {stats.find((s) => s.key === activeStat)?.label}
             </h2>
             <BookGrid books={books.filter(filters[activeStat])} />
