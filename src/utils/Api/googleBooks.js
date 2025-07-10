@@ -18,3 +18,13 @@ export const fetchGoogleBooks = async (
     return [];
   }
 };
+
+export async function fetchBookByTitle(title) {
+  const response = await fetch(
+    `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(
+      title
+    )}&maxResults=1`
+  );
+  const data = await response.json();
+  return data.items?.[0] || null;
+}

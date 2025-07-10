@@ -6,18 +6,18 @@ import "../BookSection/BookSection.css";
 function BookSection() {
   const { books, showMoreBooks } = useContext(BookContext);
   const [visibleCount, setVisibleCount] = useState(20);
-  const [isLoading, setIsLoading] = useState(false); // 🆕 Estado para mostrar el loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const showMore = async () => {
-    setIsLoading(true); // ✅ Mostrar “Cargando...”
+    setIsLoading(true);
     const nextBlock = visibleCount + 20;
 
     if (nextBlock > books.length) {
-      await showMoreBooks(); // Si es una promesa, se espera que termine
+      await showMoreBooks();
     }
 
     setVisibleCount(nextBlock);
-    setIsLoading(false); // ✅ Ocultar “Cargando...” al terminar
+    setIsLoading(false);
   };
 
   const visibleBooks = books.slice(0, visibleCount);
@@ -43,5 +43,22 @@ function BookSection() {
     </section>
   );
 }
+
+/* {visibleCount < books.length ? (
+  <div className="text-center mt-10">
+    {isLoading ? (
+      <p className="text-sm text-gray-500">Cargando más libros...</p>
+    ) : (
+      <button
+        onClick={showMore}
+        className="bg-[#390099] px-6 py-3 rounded hover:bg-[#390099]/50 transition cursor-pointer"
+      >
+        Ver más
+      </button>
+    )}
+  </div>
+) : (
+  <p className="text-sm text-gray-400 mt-10">¡Eso es todo por ahora!</p>
+)} */
 
 export default BookSection;

@@ -1,8 +1,9 @@
 import featuredBooks from "../../../data/genrebooks.json";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GenderContext } from "../../../contexts/GenderContext";
 import { BookContext } from "../../../contexts/BookContext";
 import BookModal from "../BookCard/BookModal/BookModal";
+import { fetchBookByTitle } from "../../../utils/api/googleBooks";
 
 function BookFavorite() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -10,11 +11,41 @@ function BookFavorite() {
   const genreString = (str) => str?.toLowerCase().replace(/\s/g, "");
   const { likedBooks, toggleLike, bookStatus, updateStatus } =
     useContext(BookContext);
+  const genreBookMap = {
+    Fantasy: "El Señor de los Anillos",
+    Fiction: "Dune",
+    Nonfiction: "A sangre fría",
+    Horror: "La niebla",
+    Romance: "Orgullo y prejuicio",
+    Mystery: "Diez negritos",
+    "Science Fiction": "Viaje al centro de la Tierra",
+    Drama: "Por trece razones",
+  };
+  const [apiBook, setApiBook] = useState(null);
 
-  const book =
+  useEffect(() => {
+    const loadBook = async () => {
+      const title = genreBookMap[selectedGender] || genreBookMap["Fantasy"];
+      const bookData = await fetchBookByTitle(title);
+      if (bookData) {
+        setApiBook({
+          id: bookData.id,
+          title: bookData.volumeInfo.title,
+          genre: selectedGender,
+          cover: bookData.volumeInfo.imageLinks?.thumbnail,
+          description: bookData.volumeInfo.description,
+        });
+      }
+    };
+    loadBook();
+  }, [selectedGender]);
+
+  const fallbackBook =
     featuredBooks.find(
       (book) => genreString(book.genre) === genreString(selectedGender)
     ) || featuredBooks.find((book) => book.genre === "Fantasía");
+
+  const book = apiBook || fallbackBook;
 
   const liked = likedBooks[book.id] || false;
   const currentStatus = bookStatus[book.id] || null;

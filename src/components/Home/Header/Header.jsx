@@ -13,13 +13,13 @@ import HeroOverlay from "./HeroOverlay/HeroOverlay";
 function Header() {
   const { selectedGender } = useContext(GenderContext);
   const genreViews = {
-    Ficción: fictionView,
-    "No ficción": nonFictionView,
-    Terror: horrorView,
-    Fantasía: fantasyView,
+    Fiction: fictionView,
+    Nonfiction: nonFictionView,
+    Horror: horrorView,
+    Fantasy: fantasyView,
     Romance: romanceView,
-    Misterio: mysteryView,
-    "Ciencia ficción": sciFiView,
+    Mystery: mysteryView,
+    "Science Fiction": sciFiView,
     Drama: dramaView,
   };
 
