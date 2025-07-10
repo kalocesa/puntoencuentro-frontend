@@ -4,6 +4,7 @@ import { GenderContext } from "../../../contexts/GenderContext";
 import { BookContext } from "../../../contexts/BookContext";
 import BookModal from "../BookCard/BookModal/BookModal";
 import { fetchBookByTitle } from "../../../utils/api/googleBooks";
+import { mapGoogleBook } from "../../../utils/mapGoogleBook";
 
 function BookFavorite() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,13 +29,8 @@ function BookFavorite() {
       const title = genreBookMap[selectedGender] || genreBookMap["Fantasy"];
       const bookData = await fetchBookByTitle(title);
       if (bookData) {
-        setApiBook({
-          id: bookData.id,
-          title: bookData.volumeInfo.title,
-          genre: selectedGender,
-          cover: bookData.volumeInfo.imageLinks?.thumbnail,
-          description: bookData.volumeInfo.description,
-        });
+        const mapped = mapGoogleBook(bookData);
+        setApiBook({ ...mapped, genre: selectedGender });
       }
     };
     loadBook();
@@ -67,7 +63,7 @@ function BookFavorite() {
           e.stopPropagation();
           handleDiscover();
         }}
-        src={book.cover}
+        src={book.image}
         alt={`Portada del libro ${book.title}`}
         className="w-[100px] h-[150px] md:w-[150px] md:h-[200px] rounded-2xl shadow-xl cursor-pointer"
       />
