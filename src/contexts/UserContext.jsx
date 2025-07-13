@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import avatarDefault from "@images/avatar1.png";
 import { getUserData } from "../utils/localStorageUser";
 import useAuthStatus from "../utils/useAuthStatus";
 

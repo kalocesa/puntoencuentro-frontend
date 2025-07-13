@@ -67,9 +67,9 @@ function App() {
   };
 
   return (
-    <GenderProvider>
-      <BookProvider>
-        <UserProvider>
+    <UserProvider>
+      <GenderProvider>
+        <BookProvider>
           <Navbar />
           <Routes>
             <Route path="/" element={<InitialRedirect />} />
@@ -99,9 +99,9 @@ function App() {
             />
           </Routes>
           <Footer />
-        </UserProvider>
-      </BookProvider>
-    </GenderProvider>
+        </BookProvider>
+      </GenderProvider>
+    </UserProvider>
   );
 }
 

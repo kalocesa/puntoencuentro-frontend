@@ -15,18 +15,25 @@ function Profile() {
   const [activeStat, setActiveStat] = useState("libros");
   const { books, likedBooks, countBooksByStatus, countLikedBooks, bookStatus } =
     useContext(BookContext);
+  const getUserScopedKey = (key) => (user?.uid ? `${key}_${user.uid}` : key);
+  const storedModified =
+    JSON.parse(localStorage.getItem(getUserScopedKey("modifiedBooks"))) || {};
+  const modifiedBooks = Object.values(storedModified);
   const countMultipleStatuses = (statuses) => {
-    return books.filter((book) => statuses.includes(bookStatus[book.id]))
-      .length;
+    return modifiedBooks.filter((book) =>
+      statuses.includes(bookStatus[book.id])
+    ).length;
   };
-  console.log("User desde el contexto:", user);
 
   const countByKey = {
     libros: countMultipleStatuses(["Leídos", "Leer", "Leyendo"]),
-    gustan: countLikedBooks(),
-    leidos: countBooksByStatus("Leídos"),
-    leyendo: countBooksByStatus("Leyendo"),
-    porleer: countBooksByStatus("Leer"),
+    gustan: modifiedBooks.filter((book) => likedBooks[book.id]).length,
+    leidos: modifiedBooks.filter((book) => bookStatus[book.id] === "Leídos")
+      .length,
+    leyendo: modifiedBooks.filter((book) => bookStatus[book.id] === "Leyendo")
+      .length,
+    porleer: modifiedBooks.filter((book) => bookStatus[book.id] === "Leer")
+      .length,
   };
 
   const filters = {
@@ -149,7 +156,7 @@ function Profile() {
             <h2 className="text-[30px] md:text-[50px] profile__main-title">
               {stats.find((s) => s.key === activeStat)?.label}
             </h2>
-            <BookGrid books={books.filter(filters[activeStat])} />
+            <BookGrid books={modifiedBooks.filter(filters[activeStat])} />
           </section>
         )}
       </main>

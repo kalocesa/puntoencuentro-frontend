@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { fetchGoogleBooks } from "../utils/api/googleBooks";
 import { GenderContext } from "./GenderContext";
+import { UserContext } from "./UserContext";
+import useAuthStatus from "../utils/useAuthStatus";
 
 export const BookContext = createContext();
 
@@ -10,6 +12,9 @@ export const BookProvider = ({ children }) => {
   const [bookStatus, setBookStatus] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const { selectedGender } = useContext(GenderContext);
+  const { user } = useContext(UserContext);
+  const { cargando } = useAuthStatus();
+  const getUserScopedKey = (key) => (user?.uid ? `${key}_${user.uid}` : key);
 
   const showMoreBooks = async () => {
     const queryGenre = selectedGender?.toLowerCase() || "fantasy";
@@ -42,26 +47,46 @@ export const BookProvider = ({ children }) => {
     resetAndFetch();
   }, [selectedGender]);
 
-  // 🧠 Cargar likes y status desde localStorage
   useEffect(() => {
-    const storedLikes = JSON.parse(localStorage.getItem("likedBooks")) || {};
-    const storedStatus = JSON.parse(localStorage.getItem("bookStatus")) || {};
-    setLikedBooks(storedLikes);
-    setBookStatus(storedStatus);
-  }, []);
+    if (!cargando && user?.uid) {
+      const storedLikes =
+        JSON.parse(localStorage.getItem(getUserScopedKey("likedBooks"))) || {};
+      const storedStatus =
+        JSON.parse(localStorage.getItem(getUserScopedKey("bookStatus"))) || {};
+      setLikedBooks(storedLikes);
+      setBookStatus(storedStatus);
+    }
+  }, [cargando, user?.uid]);
 
-  // ❤️ Toggle de "me gusta"
+  const saveModifiedBook = (book) => {
+    const key = getUserScopedKey("modifiedBooks");
+    const stored = JSON.parse(localStorage.getItem(key)) || {};
+    const updated = { ...stored, [book.id]: book };
+    localStorage.setItem(key, JSON.stringify(updated));
+  };
+
   const toggleLike = (bookId) => {
     const updated = { ...likedBooks, [bookId]: !likedBooks[bookId] };
     setLikedBooks(updated);
-    localStorage.setItem("likedBooks", JSON.stringify(updated));
+    localStorage.setItem(
+      getUserScopedKey("likedBooks"),
+      JSON.stringify(updated)
+    );
+
+    const book = books.find((b) => b.id === bookId);
+    if (book) saveModifiedBook(book);
   };
 
-  // 📚 Actualizar estado: "read", "toRead", etc.
   const updateStatus = (bookId, newStatus) => {
     const updated = { ...bookStatus, [bookId]: newStatus };
     setBookStatus(updated);
-    localStorage.setItem("bookStatus", JSON.stringify(updated));
+    localStorage.setItem(
+      getUserScopedKey("bookStatus"),
+      JSON.stringify(updated)
+    );
+
+    const book = books.find((b) => b.id === bookId);
+    if (book) saveModifiedBook(book);
   };
 
   // 📊 Utilidades

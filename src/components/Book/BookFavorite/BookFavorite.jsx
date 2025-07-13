@@ -6,7 +6,7 @@ import BookModal from "../BookCard/BookModal/BookModal";
 import { fetchBookByTitle } from "../../../utils/api/googleBooks";
 import { mapGoogleBook } from "../../../utils/mapGoogleBook";
 
-function BookFavorite() {
+/* function BookFavorite() {
   const [modalOpen, setModalOpen] = useState(false);
   const { selectedGender } = useContext(GenderContext);
   const genreString = (str) => str?.toLowerCase().replace(/\s/g, "");
@@ -96,6 +96,6 @@ function BookFavorite() {
       )}
     </>
   );
-}
+} */
 
 export default BookFavorite;
