@@ -7,9 +7,9 @@ import Login from "../Login/Login.jsx";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import InitialRedirect from "../InitialRedirect/InitialRedirect.jsx";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { GenderProvider } from "../../contexts/GenderContext";
-import { BookProvider } from "../../contexts/BookContext.jsx";
-import { UserProvider } from "../../contexts/UserContext.jsx";
+import { GenderProvider } from "../../providers/GenderProvider.jsx";
+import BookProvider from "../../providers/BookProvider.jsx";
+import { UserProvider } from "../../providers/UserProvider.jsx";
 import { registerUser, loginUser } from "../../utils/auth.js";
 import {
   saveUserData,

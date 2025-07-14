@@ -13,8 +13,7 @@ function Profile() {
   const [isPopupUserOpen, setIsPopupUserOpen] = useState(false);
   const { user, setUser, loading } = useContext(UserContext);
   const [activeStat, setActiveStat] = useState("libros");
-  const { books, likedBooks, countBooksByStatus, countLikedBooks, bookStatus } =
-    useContext(BookContext);
+  const { likedBooks, bookStatus } = useContext(BookContext);
   const getUserScopedKey = (key) => (user?.uid ? `${key}_${user.uid}` : key);
   const storedModified =
     JSON.parse(localStorage.getItem(getUserScopedKey("modifiedBooks"))) || {};

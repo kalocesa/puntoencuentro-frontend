@@ -28,7 +28,7 @@ function Header() {
       {/* Imagen de fondo */}
       <img
         src={genreViews[selectedGender] || fantasyView}
-        alt={`Fondo para el género: ${selectedGender}` || "Fantasía"}
+        alt={`Fondo para el género: ${selectedGender}`}
         id="hero"
         className="absolute inset-0 w-full h-full object-cover z-0"
       />

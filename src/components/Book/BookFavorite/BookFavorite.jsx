@@ -1,11 +1,11 @@
-import featuredBooks from "../../../data/genrebooks.json";
+/* import featuredBooks from "../../../data/genrebooks.json";
 import { useContext, useState, useEffect } from "react";
 import { GenderContext } from "../../../contexts/GenderContext";
 import { BookContext } from "../../../contexts/BookContext";
 import BookModal from "../BookCard/BookModal/BookModal";
 import { fetchBookByTitle } from "../../../utils/api/googleBooks";
 import { mapGoogleBook } from "../../../utils/mapGoogleBook";
-
+ */
 /* function BookFavorite() {
   const [modalOpen, setModalOpen] = useState(false);
   const { selectedGender } = useContext(GenderContext);
@@ -98,4 +98,4 @@ import { mapGoogleBook } from "../../../utils/mapGoogleBook";
   );
 } */
 
-export default BookFavorite;
+//export default BookFavorite;

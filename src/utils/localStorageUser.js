@@ -1,5 +1,3 @@
-import avatarDefault from "@images/avatar1.png";
-
 function getStorageKey(uid) {
   return `userData_${uid}`;
 }
