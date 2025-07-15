@@ -1,4 +1,4 @@
-import bookImage from "../../public/book.png";
+import bookImage from "../images/sinportada.png";
 
 export const mapGoogleBook = (book) => {
   const identifiers = book.volumeInfo.industryIdentifiers || [];
