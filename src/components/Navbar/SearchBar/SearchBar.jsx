@@ -1,8 +1,12 @@
-import { useState } from "react";
-import blackShare from "@icons/share-black.svg"; // o el que necesites
+import { useState, useContext } from "react";
+import { BookContext } from "../../../contexts/BookContext";
+import blackShare from "@icons/share-black.svg";
+import { useNavigate } from "react-router-dom";
 
 function SearchBar({ scrolled }) {
   const [query, setQuery] = useState("");
+  const { searchBooks } = useContext(BookContext);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -10,17 +14,17 @@ function SearchBar({ scrolled }) {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && query.trim() !== "") {
-      console.log("Buscar:", query);
-      // Aquí podrías llamar a una función o redirigir
+      searchBooks(query);
+      navigate("/search");
     }
   };
 
   const handleSearchClick = () => {
     if (query.trim() !== "") {
-      console.log("Buscar:", query);
+      searchBooks(query);
+      navigate("/search");
     }
   };
-
   return (
     <div className="relative">
       <input

@@ -4,6 +4,7 @@ import Home from "../Home/Home.jsx";
 import Profile from "../Profile/Profile.jsx";
 import { Register } from "../Register/Register.jsx";
 import Login from "../Login/Login.jsx";
+import BookSearch from "../Book/BookSearch/BookSearch.jsx";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.jsx";
 import InitialRedirect from "../InitialRedirect/InitialRedirect.jsx";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -88,6 +89,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <PrivateRoute>
+                  <BookSearch />
                 </PrivateRoute>
               }
             />

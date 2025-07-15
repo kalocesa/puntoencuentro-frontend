@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 import { fetchGoogleBooks } from "../utils/Api/googleBooks";
 import { fetchBookByTitle } from "../utils/Api/googleBooks";
+import { fetchBooksByQuery } from "../utils/Api/googleBooks";
 import { mapGoogleBook } from "../utils/mapGoogleBook";
 import { GenderContext } from "../contexts/GenderContext";
 import { UserContext } from "../contexts/UserContext";
@@ -12,18 +13,19 @@ export const BookProvider = ({ children }) => {
   const [likedBooks, setLikedBooks] = useState({});
   const [featuredBook, setFeaturedBook] = useState(null);
   const [bookStatus, setBookStatus] = useState({});
-  const [currentPage, setCurrentPage] = useState(0);
   const { selectedGender } = useContext(GenderContext);
   const { user } = useContext(UserContext);
   const { cargando } = useAuthStatus();
+  const [loadingBooks, setLoadingBooks] = useState(false);
   const getUserScopedKey = useCallback(
     (key) => (user?.uid ? `${key}_${user.uid}` : key),
     [user?.uid]
   );
 
   const showMoreBooks = async () => {
+    setLoadingBooks(true);
     const queryGenre = selectedGender?.toLowerCase() || "fantasy";
-    const nextStartIndex = books.length; // Esto respeta lo que ya tienes
+    const nextStartIndex = books.length;
     const newBooks = await fetchGoogleBooks(queryGenre, nextStartIndex, 12);
 
     setBooks((prevBooks) => {
@@ -33,12 +35,12 @@ export const BookProvider = ({ children }) => {
       );
       return [...prevBooks, ...filteredBooks];
     });
+    setLoadingBooks(false);
   };
 
   useEffect(() => {
     const resetAndFetch = async () => {
       setBooks([]);
-      setCurrentPage(0);
 
       const initialBooks = await fetchGoogleBooks(
         selectedGender?.toLowerCase() || "fantasy",
@@ -104,6 +106,13 @@ export const BookProvider = ({ children }) => {
     localStorage.setItem(key, JSON.stringify(updated));
   };
 
+  const searchBooks = async (query) => {
+    setLoadingBooks(true);
+    const newBooks = await fetchBooksByQuery(query);
+    setBooks(newBooks);
+    setLoadingBooks(false);
+  };
+
   const toggleLike = (bookId) => {
     const updated = { ...likedBooks, [bookId]: !likedBooks[bookId] };
     setLikedBooks(updated);
@@ -134,6 +143,17 @@ export const BookProvider = ({ children }) => {
   const countBooksByStatus = (status) => getBooksByStatus(status).length;
   const countLikedBooks = () => likedBooksList.length;
 
+  const resetBooksToGenre = async () => {
+    setLoadingBooks(true);
+    const initialBooks = await fetchGoogleBooks(
+      selectedGender?.toLowerCase() || "fantasy",
+      0,
+      24
+    );
+    setBooks(initialBooks);
+    setLoadingBooks(false);
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -148,6 +168,9 @@ export const BookProvider = ({ children }) => {
         countBooksByStatus,
         countLikedBooks,
         showMoreBooks,
+        searchBooks,
+        resetBooksToGenre,
+        loadingBooks,
       }}
     >
       {children}
