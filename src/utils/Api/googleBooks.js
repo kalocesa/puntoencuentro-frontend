@@ -19,7 +19,7 @@ export const fetchGoogleBooks = async (
   }
 };
 
-/* export async function fetchBookByTitle(title) {
+export async function fetchBookByTitle(title) {
   const response = await fetch(
     `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(
       title
@@ -27,4 +27,4 @@ export const fetchGoogleBooks = async (
   );
   const data = await response.json();
   return data.items?.[0] || null;
-} */
+}

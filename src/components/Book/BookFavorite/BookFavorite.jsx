@@ -1,53 +1,17 @@
-/* import featuredBooks from "../../../data/genrebooks.json";
-import { useContext, useState, useEffect } from "react";
-import { GenderContext } from "../../../contexts/GenderContext";
+import { useContext, useState } from "react";
 import { BookContext } from "../../../contexts/BookContext";
 import BookModal from "../BookCard/BookModal/BookModal";
-import { fetchBookByTitle } from "../../../utils/api/googleBooks";
-import { mapGoogleBook } from "../../../utils/mapGoogleBook";
- */
-/* function BookFavorite() {
+
+function BookFavorite() {
   const [modalOpen, setModalOpen] = useState(false);
-  const { selectedGender } = useContext(GenderContext);
-  const genreString = (str) => str?.toLowerCase().replace(/\s/g, "");
-  const { likedBooks, toggleLike, bookStatus, updateStatus } =
+  const { featuredBook, likedBooks, toggleLike, bookStatus, updateStatus } =
     useContext(BookContext);
-  const genreBookMap = {
-    Fantasy: "El Señor de los Anillos",
-    Fiction: "Dune",
-    Nonfiction: "A sangre fría",
-    Horror: "La niebla",
-    Romance: "Orgullo y prejuicio",
-    Mystery: "Diez negritos",
-    "Science Fiction": "Viaje al centro de la Tierra",
-    Drama: "Por trece razones",
-  };
-  const [apiBook, setApiBook] = useState(null);
 
-  useEffect(() => {
-    const loadBook = async () => {
-      const title = genreBookMap[selectedGender] || genreBookMap["Fantasy"];
-      const bookData = await fetchBookByTitle(title);
-      if (bookData) {
-        const mapped = mapGoogleBook(bookData);
-        setApiBook({ ...mapped, genre: selectedGender });
-      }
-    };
-    loadBook();
-  }, [selectedGender]);
-
-  const fallbackBook =
-    featuredBooks.find(
-      (book) => genreString(book.genre) === genreString(selectedGender)
-    ) || featuredBooks.find((book) => book.genre === "Fantasía");
-
-  const book = apiBook || fallbackBook;
-
-  const liked = likedBooks[book.id] || false;
-  const currentStatus = bookStatus[book.id] || null;
+  const book = featuredBook;
+  const liked = book ? likedBooks[book.id] || false : false;
+  const currentStatus = book ? bookStatus[book.id] || null : null;
 
   const handleDiscover = () => setModalOpen(true);
-
   const closeModal = () => setModalOpen(false);
 
   const statusColors = {
@@ -55,6 +19,8 @@ import { mapGoogleBook } from "../../../utils/mapGoogleBook";
     Leyendo: "bg-[#FF5400] hover:bg-orange-800",
     Leídos: "bg-[#FF0054] hover:bg-pink-700",
   };
+
+  if (!book) return null; // ⏳ Puedes mostrar un loader si prefieres
 
   return (
     <>
@@ -96,6 +62,6 @@ import { mapGoogleBook } from "../../../utils/mapGoogleBook";
       )}
     </>
   );
-} */
+}
 
-//export default BookFavorite;
+export default BookFavorite;

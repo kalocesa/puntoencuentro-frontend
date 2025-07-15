@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 import { fetchGoogleBooks } from "../utils/api/googleBooks";
+import { fetchBookByTitle } from "../utils/api/googleBooks";
+import { mapGoogleBook } from "../utils/mapGoogleBook";
 import { GenderContext } from "../contexts/GenderContext";
 import { UserContext } from "../contexts/UserContext";
 import useAuthStatus from "../utils/useAuthStatus";
@@ -8,6 +10,7 @@ import { BookContext } from "../contexts/BookContext";
 export const BookProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
   const [likedBooks, setLikedBooks] = useState({});
+  const [featuredBook, setFeaturedBook] = useState(null);
   const [bookStatus, setBookStatus] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const { selectedGender } = useContext(GenderContext);
@@ -48,6 +51,41 @@ export const BookProvider = ({ children }) => {
 
     resetAndFetch();
   }, [selectedGender]);
+
+  useEffect(() => {
+    const fetchFeaturedBook = async () => {
+      const titleMap = {
+        Fantasy: "El Señor de los Anillos",
+        Fiction: "Dune",
+        Nonfiction: "A sangre fría",
+        Horror: "La niebla",
+        Romance: "Orgullo y prejuicio",
+        Mystery: "Diez negritos",
+        "Science Fiction": "Viaje al centro de la Tierra",
+        Drama: "Por trece razones",
+      };
+
+      const title = titleMap[selectedGender] || titleMap["Fantasy"];
+      const rawBook = await fetchBookByTitle(title);
+
+      if (rawBook) {
+        const mapped = mapGoogleBook(rawBook);
+        const enrichedBook = {
+          ...mapped,
+          genre: selectedGender,
+        };
+
+        setFeaturedBook(enrichedBook);
+
+        const key = getUserScopedKey("modifiedBooks");
+        const stored = JSON.parse(localStorage.getItem(key)) || {};
+        const updated = { ...stored, [enrichedBook.id]: enrichedBook };
+        localStorage.setItem(key, JSON.stringify(updated));
+      }
+    };
+
+    fetchFeaturedBook();
+  }, [selectedGender, getUserScopedKey]);
 
   useEffect(() => {
     if (!cargando && user?.uid) {
@@ -91,7 +129,6 @@ export const BookProvider = ({ children }) => {
     if (book) saveModifiedBook(book);
   };
 
-  // 📊 Utilidades
   const likedBooksList = books.filter((book) => likedBooks[book.id]);
   const getBooksByStatus = (status) =>
     books.filter((book) => bookStatus[book.id] === status);
@@ -102,6 +139,7 @@ export const BookProvider = ({ children }) => {
     <BookContext.Provider
       value={{
         books,
+        featuredBook,
         likedBooks,
         bookStatus,
         toggleLike,

@@ -29,10 +29,6 @@ function PopupUser({ isOpen, onClose }) {
     }));
 
     onClose();
-    console.log(
-      "🪄 Guardado local:",
-      JSON.parse(localStorage.getItem("userData"))
-    );
   };
 
   if (!isOpen) return null;

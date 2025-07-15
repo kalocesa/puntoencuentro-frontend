@@ -31,8 +31,6 @@ function App() {
         avatar,
         about: "Add a short description 📝",
       });
-
-      console.log("Usuario registrado:", user);
       navigate("/signin");
     } catch (error) {
       console.error("Error al registrar:", error.message);
@@ -43,9 +41,7 @@ function App() {
     try {
       const userCredential = await loginUser(email, password);
       const user = userCredential.user;
-
       const localData = getUserData(user.uid);
-      console.log("🧾 LocalStorage al iniciar sesión:", localData);
 
       if (
         !localData.name?.trim() ||
@@ -58,8 +54,6 @@ function App() {
           avatar: localData.avatar || avatar,
         });
       }
-
-      console.log("Usuario inició sesión:", user);
       navigate("/profile");
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
