@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useCallback } from "react";
-import { fetchGoogleBooks } from "../utils/api/googleBooks";
-import { fetchBookByTitle } from "../utils/api/googleBooks";
+import { fetchGoogleBooks } from "../utils/Api/googleBooks";
+import { fetchBookByTitle } from "../utils/Api/googleBooks";
 import { mapGoogleBook } from "../utils/mapGoogleBook";
 import { GenderContext } from "../contexts/GenderContext";
 import { UserContext } from "../contexts/UserContext";
@@ -23,15 +23,14 @@ export const BookProvider = ({ children }) => {
 
   const showMoreBooks = async () => {
     const queryGenre = selectedGender?.toLowerCase() || "fantasy";
-    const newBooks = await fetchGoogleBooks(queryGenre, currentPage * 20, 20);
+    const nextStartIndex = books.length; // Esto respeta lo que ya tienes
+    const newBooks = await fetchGoogleBooks(queryGenre, nextStartIndex, 12);
 
     setBooks((prevBooks) => {
       const existingIds = new Set(prevBooks.map((book) => book.id));
       const filteredBooks = newBooks.filter(
         (book) => !existingIds.has(book.id)
       );
-
-      setCurrentPage((prevPage) => prevPage + 1);
       return [...prevBooks, ...filteredBooks];
     });
   };
@@ -44,7 +43,7 @@ export const BookProvider = ({ children }) => {
       const initialBooks = await fetchGoogleBooks(
         selectedGender?.toLowerCase() || "fantasy",
         0,
-        20
+        24
       );
       setBooks(initialBooks);
     };

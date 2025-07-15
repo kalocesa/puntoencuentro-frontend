@@ -20,7 +20,7 @@ function BookGrid({ books: incomingBooks, limit }) {
 
   return (
     <>
-      <div className="max-w-[1800px] grid grid-flow-row gap-5 sm:gap-15 md:gap-8 lg:gap-15 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 mx-auto px-0 pt-5 sm:px-20 sm:pt-10">
+      <div className="max-w-[1536px] grid grid-flow-row grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6  gap-5 md:gap-10 mx-auto">
         {visibleBooks.map((book) => (
           <BookCard
             key={book.id}

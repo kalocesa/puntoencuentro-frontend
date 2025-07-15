@@ -81,6 +81,18 @@ function Profile() {
     return null;
   }
 
+  const emptyMessages = {
+    libros:
+      "Tu biblioteca espera ser descubierta... cada historia comienza con una página en blanco.",
+    gustan:
+      "Todavía no has marcado ningún libro como favorito, pero hay muchos esperando tu corazón.",
+    leidos:
+      "Aún no has terminado ningún libro, pero el viaje está por comenzar.",
+    leyendo:
+      "No tienes lecturas activas, ¿te animas a empezar una nueva aventura?",
+    porleer:
+      "Tu lista de deseos está vacía... elige el próximo libro que te llame.",
+  };
   return (
     <>
       <header className="mt-10 gap-8 p-6 profile__background-image">
@@ -155,7 +167,13 @@ function Profile() {
             <h2 className="text-[30px] md:text-[50px] profile__main-title">
               {stats.find((s) => s.key === activeStat)?.label}
             </h2>
-            <BookGrid books={modifiedBooks.filter(filters[activeStat])} />
+            {modifiedBooks.filter(filters[activeStat]).length > 0 ? (
+              <BookGrid books={modifiedBooks.filter(filters[activeStat])} />
+            ) : (
+              <p className="text-center text-lg md:text-xl text-gray-500 italic my-40">
+                {emptyMessages[activeStat]}
+              </p>
+            )}{" "}
           </section>
         )}
       </main>
