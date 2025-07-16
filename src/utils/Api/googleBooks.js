@@ -34,7 +34,7 @@ export const fetchBooksByQuery = async (query) => {
     const response = await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
         query
-      )}&maxResults=24&key=${API_KEY}`
+      )}&maxResults=30&key=${API_KEY}`
     );
     const data = await response.json();
     return (data.items || []).map(mapGoogleBook);

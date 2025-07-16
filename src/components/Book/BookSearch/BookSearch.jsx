@@ -17,7 +17,7 @@ function BookSearch() {
   }, [location.pathname]);
 
   return (
-    <div className="mt-10">
+    <div className="mt-25">
       {loadingBooks ? (
         <p className="text-center text-gray-500">Cargando libros...</p>
       ) : books.length > 0 ? (
