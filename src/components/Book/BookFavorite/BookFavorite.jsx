@@ -20,7 +20,7 @@ function BookFavorite() {
     Leídos: "bg-[#FF0054] hover:bg-pink-700",
   };
 
-  if (!book) return null; // ⏳ Puedes mostrar un loader si prefieres
+  if (!book) return null;
 
   return (
     <>

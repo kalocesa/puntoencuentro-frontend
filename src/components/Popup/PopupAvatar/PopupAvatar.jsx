@@ -79,7 +79,7 @@ function PopupAvatar({ isOpen, onClose, currentAvatar, onSave }) {
                 ...prev,
                 avatar: selectedAvatar,
               }));
-              onSave(selectedAvatar); // si lo usas para re-render externo
+              onSave(selectedAvatar);
               onClose();
             }}
             className="w-full px-4 py-2 bg-[#9e0059] text-xl cursor-pointer rounded-full hover:bg-[#9e0059]/30"

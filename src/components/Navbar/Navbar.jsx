@@ -9,7 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 import useClickOutside from "../../hooks/useClickOutside.js";
 import { GenderContext } from "../../contexts/GenderContext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import app from "../../config/firebaseConfig.js"; // asegúrate que el path es correcto
+import app from "../../config/firebaseConfig.js";
 
 const auth = getAuth(app);
 

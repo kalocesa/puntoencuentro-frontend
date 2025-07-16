@@ -32,9 +32,7 @@ function BookModal({
             className="w-8"
           />
         </button>
-        {/* Aquí empieza el grid */}
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Columna 1 */}
           <div className="bg-stone-50 rounded-lg p-2 items-center max-h-[360px] w-[150px] md:w-2/4 m-auto flex flex-col">
             <img
               src={book.image}
@@ -42,7 +40,6 @@ function BookModal({
               className="w-32 md:w-50 md:min-h-[300px] md:max-h-[301px] mx-auto object-cover rounded-lg"
             />
             <div className="grid grid-cols-2 mt-2 max-w-[125px] md:max-w-[200px]">
-              {/* Botones */}
               <SaveDropdown
                 currentStatus={currentStatus}
                 onSelectStatus={onSelectStatus}
@@ -61,7 +58,6 @@ function BookModal({
             </div>
           </div>
 
-          {/* Columna 2 */}
           <div className="mt-4 md:mt-5 h-[350px] overflow-y-auto pr-2">
             <p className="bookmodal__property font-bold">
               Título:

@@ -1,8 +1,8 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import app from "../config/firebaseConfig.js"; // ajusta la ruta si es necesario
+import app from "../config/firebaseConfig.js";
 
-const auth = getAuth(app); // ✅ usando tu instancia de Firebase
+const auth = getAuth(app);
 
 const useAuthStatus = () => {
   const [currentUser, setcurrentUser] = useState(null);
@@ -14,7 +14,7 @@ const useAuthStatus = () => {
       setCargando(false);
     });
 
-    return () => unsubscribe(); // 🧼 limpieza al desmontar
+    return () => unsubscribe();
   }, []);
 
   return { currentUser, cargando };

@@ -16,6 +16,7 @@ function SearchBar({ scrolled }) {
     if (e.key === "Enter" && query.trim() !== "") {
       searchBooks(query);
       navigate("/search");
+      setQuery("");
     }
   };
 
@@ -23,8 +24,10 @@ function SearchBar({ scrolled }) {
     if (query.trim() !== "") {
       searchBooks(query);
       navigate("/search");
+      setQuery("");
     }
   };
+
   return (
     <div className="relative">
       <input
