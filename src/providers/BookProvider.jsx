@@ -7,6 +7,7 @@ import { GenderContext } from "../contexts/GenderContext";
 import { UserContext } from "../contexts/UserContext";
 import useAuthStatus from "../utils/useAuthStatus";
 import { BookContext } from "../contexts/BookContext";
+import { LoaderContext } from "./LoaderProvider";
 
 export const BookProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
@@ -15,15 +16,14 @@ export const BookProvider = ({ children }) => {
   const [bookStatus, setBookStatus] = useState({});
   const { selectedGender } = useContext(GenderContext);
   const { user } = useContext(UserContext);
+  const { setIsLoading } = useContext(LoaderContext);
   const { cargando } = useAuthStatus();
-  const [loadingBooks, setLoadingBooks] = useState(false);
   const getUserScopedKey = useCallback(
     (key) => (user?.uid ? `${key}_${user.uid}` : key),
     [user?.uid]
   );
 
   const showMoreBooks = async () => {
-    setLoadingBooks(true);
     const queryGenre = selectedGender?.toLowerCase() || "fantasy";
     const nextStartIndex = books.length;
     const newBooks = await fetchGoogleBooks(queryGenre, nextStartIndex, 12);
@@ -35,19 +35,19 @@ export const BookProvider = ({ children }) => {
       );
       return [...prevBooks, ...filteredBooks];
     });
-    setLoadingBooks(false);
   };
 
   useEffect(() => {
     const resetAndFetch = async () => {
+      setIsLoading(true);
       setBooks([]);
-
       const initialBooks = await fetchGoogleBooks(
         selectedGender?.toLowerCase() || "fantasy",
         0,
         24
       );
       setBooks(initialBooks);
+      setIsLoading(false);
     };
 
     resetAndFetch();
@@ -107,10 +107,10 @@ export const BookProvider = ({ children }) => {
   };
 
   const searchBooks = async (query) => {
-    setLoadingBooks(true);
+    setIsLoading(true);
     const newBooks = await fetchBooksByQuery(query);
     setBooks(newBooks);
-    setLoadingBooks(false);
+    setIsLoading(false);
   };
 
   const toggleLike = (bookId) => {
@@ -144,14 +144,14 @@ export const BookProvider = ({ children }) => {
   const countLikedBooks = () => likedBooksList.length;
 
   const resetBooksToGenre = async () => {
-    setLoadingBooks(true);
+    setIsLoading(true);
     const initialBooks = await fetchGoogleBooks(
       selectedGender?.toLowerCase() || "fantasy",
       0,
       24
     );
     setBooks(initialBooks);
-    setLoadingBooks(false);
+    setIsLoading(false);
   };
 
   return (
@@ -170,7 +170,6 @@ export const BookProvider = ({ children }) => {
         showMoreBooks,
         searchBooks,
         resetBooksToGenre,
-        loadingBooks,
       }}
     >
       {children}

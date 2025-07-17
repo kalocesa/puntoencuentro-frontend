@@ -11,6 +11,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { GenderProvider } from "../../providers/GenderProvider.jsx";
 import BookProvider from "../../providers/BookProvider.jsx";
 import { UserProvider } from "../../providers/UserProvider.jsx";
+import { LoaderProvider } from "../../providers/LoaderProvider.jsx";
 import { registerUser, loginUser } from "../../utils/auth.js";
 import {
   saveUserData,
@@ -62,49 +63,51 @@ function App() {
   };
 
   return (
-    <UserProvider>
-      <GenderProvider>
-        <BookProvider>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<InitialRedirect />} />
-            <Route
-              path="/home"
-              element={
-                <PrivateRoute>
-                  <Home />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/signup"
-              element={<Register handleRegister={handleRegister} />}
-            />
-            <Route
-              path="/signin"
-              element={<Login handleLogin={handleLogin} />}
-            />
-            <Route
-              path="/profile"
-              element={
-                <PrivateRoute>
-                  <Profile />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <PrivateRoute>
-                  <BookSearch />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
-          <Footer />
-        </BookProvider>
-      </GenderProvider>
-    </UserProvider>
+    <LoaderProvider>
+      <UserProvider>
+        <GenderProvider>
+          <BookProvider>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<InitialRedirect />} />
+              <Route
+                path="/home"
+                element={
+                  <PrivateRoute>
+                    <Home />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/signup"
+                element={<Register handleRegister={handleRegister} />}
+              />
+              <Route
+                path="/signin"
+                element={<Login handleLogin={handleLogin} />}
+              />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/search"
+                element={
+                  <PrivateRoute>
+                    <BookSearch />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+            <Footer />
+          </BookProvider>
+        </GenderProvider>
+      </UserProvider>
+    </LoaderProvider>
   );
 }
 
