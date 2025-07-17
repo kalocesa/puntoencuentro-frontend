@@ -22,7 +22,6 @@ function Header() {
     "Science Fiction": sciFiView,
     Drama: dramaView,
   };
-
   return (
     <header className="relative h-[500px] md:h-[1000px] overflow-hidden">
       <img

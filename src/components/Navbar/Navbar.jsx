@@ -31,20 +31,40 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
-    const target = document.getElementById("hero");
+    let retryCount = 0;
+    let scrollListener;
 
-    const handleScroll = () => {
-      if (!target) {
-        setScrolled(true);
+    const tryDetectHero = () => {
+      const target = document.getElementById("hero");
+
+      if (!target && retryCount < 2) {
+        retryCount++;
+        setTimeout(tryDetectHero, 150);
         return;
       }
-      const top = target.getBoundingClientRect().bottom;
-      setScrolled(top <= 0);
+
+      const handleScroll = () => {
+        if (!target) {
+          setScrolled(true);
+          return;
+        }
+        const top = target.getBoundingClientRect().bottom;
+        setScrolled(top <= 0);
+      };
+
+      handleScroll();
+      scrollListener = handleScroll;
+      window.addEventListener("scroll", scrollListener);
     };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [location]);
+
+    tryDetectHero();
+
+    return () => {
+      if (scrollListener) {
+        window.removeEventListener("scroll", scrollListener);
+      }
+    };
+  }, [location.pathname]);
 
   return (
     <nav
