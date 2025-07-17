@@ -37,7 +37,7 @@ function Navbar() {
     const tryDetectHero = () => {
       const target = document.getElementById("hero");
 
-      if (!target && retryCount < 2) {
+      if (!target && retryCount < 3) {
         retryCount++;
         setTimeout(tryDetectHero, 150);
         return;
