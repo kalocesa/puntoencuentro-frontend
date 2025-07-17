@@ -8,15 +8,27 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import useClickOutside from "../../hooks/useClickOutside.js";
 import { GenderContext } from "../../contexts/GenderContext";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import app from "../../config/firebaseConfig.js";
+
+const auth = getAuth(app);
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef(null);
   const location = useLocation();
   useClickOutside(menuRef, () => setIsMenuOpen(false));
   const { setSelectedGender } = useContext(GenderContext);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const target = document.getElementById("hero");
@@ -42,7 +54,7 @@ function Navbar() {
     >
       <div className="flex items-center gap-2 text-xl font-bold text-indigo-600">
         <Link
-          to="/"
+          to="/home"
           onClick={() => {
             setSelectedGender("");
           }}

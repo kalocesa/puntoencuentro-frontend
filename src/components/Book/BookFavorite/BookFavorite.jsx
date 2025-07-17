@@ -1,26 +1,17 @@
-import featuredBooks from "../../../data/genrebooks.json";
 import { useContext, useState } from "react";
-import { GenderContext } from "../../../contexts/GenderContext";
 import { BookContext } from "../../../contexts/BookContext";
 import BookModal from "../BookCard/BookModal/BookModal";
 
 function BookFavorite() {
   const [modalOpen, setModalOpen] = useState(false);
-  const { selectedGender } = useContext(GenderContext);
-  const genreString = (str) => str?.toLowerCase().replace(/\s/g, "");
-  const { likedBooks, toggleLike, bookStatus, updateStatus } =
+  const { featuredBook, likedBooks, toggleLike, bookStatus, updateStatus } =
     useContext(BookContext);
 
-  const book =
-    featuredBooks.find(
-      (book) => genreString(book.genre) === genreString(selectedGender)
-    ) || featuredBooks.find((book) => book.genre === "Fantasía");
-
-  const liked = likedBooks[book.id] || false;
-  const currentStatus = bookStatus[book.id] || null;
+  const book = featuredBook;
+  const liked = book ? likedBooks[book.id] || false : false;
+  const currentStatus = book ? bookStatus[book.id] || null : null;
 
   const handleDiscover = () => setModalOpen(true);
-
   const closeModal = () => setModalOpen(false);
 
   const statusColors = {
@@ -29,6 +20,8 @@ function BookFavorite() {
     Leídos: "bg-[#FF0054] hover:bg-pink-700",
   };
 
+  if (!book) return null;
+
   return (
     <>
       <img
@@ -36,7 +29,7 @@ function BookFavorite() {
           e.stopPropagation();
           handleDiscover();
         }}
-        src={book.cover}
+        src={book.image}
         alt={`Portada del libro ${book.title}`}
         className="w-[100px] h-[150px] md:w-[150px] md:h-[200px] rounded-2xl shadow-xl cursor-pointer"
       />

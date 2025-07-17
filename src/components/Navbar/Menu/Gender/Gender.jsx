@@ -10,23 +10,22 @@ function Gender({ setIsMenuOpen }) {
   const genderRef = useRef(null);
   useOutsideClick(genderRef, () => setOpen(false));
   const navigate = useNavigate();
-
   const genders = [
-    "Ficción",
-    "No ficción",
-    "Terror",
-    "Fantasía",
-    "Romance",
-    "Misterio",
-    "Ciencia ficción",
-    "Drama",
+    { label: "Ficción", value: "Fiction" },
+    { label: "No ficción", value: "Nonfiction" },
+    { label: "Terror", value: "Horror" },
+    { label: "Fantasía", value: "Fantasy" },
+    { label: "Romance", value: "Romance" },
+    { label: "Misterio", value: "Mystery" },
+    { label: "Ciencia ficción", value: "Science Fiction" },
+    { label: "Drama", value: "Drama" },
   ];
 
   const handleClick = (gender) => {
     setSelectedGender(gender);
     setOpen(false);
     setIsMenuOpen(false);
-    navigate("/");
+    navigate("/home");
   };
 
   return (
@@ -45,15 +44,15 @@ function Gender({ setIsMenuOpen }) {
 
       {open && (
         <ul className="mt-0 w-55 z-10">
-          {genders.map((gender) => (
+          {genders.map(({ label, value }) => (
             <li
-              key={gender}
-              className="px-4 py-1 hover:bg-gray-400/10 cursor-pointer text-sm "
+              key={value}
+              className="px-4 py-1 hover:bg-gray-400/10 cursor-pointer text-sm"
               onClick={() => {
-                handleClick(gender);
+                handleClick(value);
               }}
             >
-              {gender}
+              {label}
             </li>
           ))}
         </ul>

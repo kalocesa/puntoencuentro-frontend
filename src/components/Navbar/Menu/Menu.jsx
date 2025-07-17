@@ -1,15 +1,23 @@
-import avatar from "@images/avatar2.png";
 import Gender from "./Gender/Gender.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useClickOutside from "../../../hooks/useClickOutside.js";
 import { useRef, useContext } from "react";
 import { UserContext } from "../../../contexts/UserContext.jsx";
+import { logoutUser } from "../../../utils/auth.js";
+import { clearUserData } from "../../../utils/localStorageUser.js";
 
-function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
-  /* Revisar el isLoggedIn para verificar la autenticación del inicio de sesión, cerrar sesión y registrarse */
+function Menu({ setIsMenuOpen, isLoggedIn }) {
   const menuRef = useRef(null);
   useClickOutside(menuRef, () => setIsMenuOpen(false));
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logoutUser();
+    await clearUserData();
+    setIsMenuOpen(false);
+    navigate("/signin");
+  };
 
   return (
     <div ref={menuRef}>
@@ -24,7 +32,6 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
             <p className="text-m">{user.name}</p>
           </div>
           <div className="flex flex-col">
-            {/* Probable tenga que cambiar el to por un OnClick, investigar */}
             <Link
               to="/profile"
               onClick={() => setIsMenuOpen(false)}
@@ -33,12 +40,8 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
               Ver perfil
             </Link>
             <Gender setIsMenuOpen={setIsMenuOpen} />
-            {/* Quisiera cambiar los botones por Link, para manejar las rutas a "/signin" y "/signup" */}
             <button
-              onClick={() => {
-                setIsLoggedIn(false);
-                setIsMenuOpen(false);
-              }}
+              onClick={handleLogout}
               className="mt-2 px-4 py-1 rounded-full bg-[#ff0054] hover:bg-[#ff0054]/30 cursor-pointer"
             >
               Cerrar sesión
@@ -50,7 +53,6 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
           <Link
             to="/signin"
             onClick={() => {
-              setIsLoggedIn(true);
               setIsMenuOpen(false);
             }}
             className="mt-2 px-4 py-1 rounded-full bg-[#ff0054] hover:bg-[#ff0054]/30 cursor-pointer"
@@ -60,7 +62,6 @@ function Menu({ isLoggedIn, setIsLoggedIn, setIsMenuOpen }) {
           <Link
             to="/signup"
             onClick={() => {
-              setIsLoggedIn(false);
               setIsMenuOpen(false);
             }}
             className="mt-2 px-4 py-1 rounded-full bg-[#ff5400] hover:bg-[#ff5400]/30 cursor-pointer"

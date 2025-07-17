@@ -13,27 +13,25 @@ import HeroOverlay from "./HeroOverlay/HeroOverlay";
 function Header() {
   const { selectedGender } = useContext(GenderContext);
   const genreViews = {
-    Ficción: fictionView,
-    "No ficción": nonFictionView,
-    Terror: horrorView,
-    Fantasía: fantasyView,
+    Fiction: fictionView,
+    Nonfiction: nonFictionView,
+    Horror: horrorView,
+    Fantasy: fantasyView,
     Romance: romanceView,
-    Misterio: mysteryView,
-    "Ciencia ficción": sciFiView,
+    Mystery: mysteryView,
+    "Science Fiction": sciFiView,
     Drama: dramaView,
   };
 
   return (
     <header className="relative h-[500px] md:h-[1000px] overflow-hidden">
-      {/* Imagen de fondo */}
       <img
         src={genreViews[selectedGender] || fantasyView}
-        alt={`Fondo para el género: ${selectedGender}` || "Fantasía"}
+        alt={`Fondo para el género: ${selectedGender}`}
         id="hero"
         className="absolute inset-0 w-full h-full object-cover z-0"
       />
 
-      {/* Contenido encima */}
       <div className="relative top-65  md:top-170">
         <HeroOverlay />
       </div>

@@ -11,21 +11,28 @@ import { useState, useContext } from "react";
 function Profile() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isPopupUserOpen, setIsPopupUserOpen] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, loading } = useContext(UserContext);
   const [activeStat, setActiveStat] = useState("libros");
-  const { books, likedBooks, countBooksByStatus, countLikedBooks, bookStatus } =
-    useContext(BookContext);
+  const { likedBooks, bookStatus } = useContext(BookContext);
+  const getUserScopedKey = (key) => (user?.uid ? `${key}_${user.uid}` : key);
+  const storedModified =
+    JSON.parse(localStorage.getItem(getUserScopedKey("modifiedBooks"))) || {};
+  const modifiedBooks = Object.values(storedModified);
   const countMultipleStatuses = (statuses) => {
-    return books.filter((book) => statuses.includes(bookStatus[book.id]))
-      .length;
+    return modifiedBooks.filter((book) =>
+      statuses.includes(bookStatus[book.id])
+    ).length;
   };
 
   const countByKey = {
     libros: countMultipleStatuses(["Leídos", "Leer", "Leyendo"]),
-    gustan: countLikedBooks(),
-    leidos: countBooksByStatus("Leídos"),
-    leyendo: countBooksByStatus("Leyendo"),
-    porleer: countBooksByStatus("Leer"),
+    gustan: modifiedBooks.filter((book) => likedBooks[book.id]).length,
+    leidos: modifiedBooks.filter((book) => bookStatus[book.id] === "Leídos")
+      .length,
+    leyendo: modifiedBooks.filter((book) => bookStatus[book.id] === "Leyendo")
+      .length,
+    porleer: modifiedBooks.filter((book) => bookStatus[book.id] === "Leer")
+      .length,
   };
 
   const filters = {
@@ -70,12 +77,28 @@ function Profile() {
     },
   ];
 
+  if (loading || !user) {
+    return null;
+  }
+
+  const emptyMessages = {
+    libros:
+      "Tu biblioteca espera ser descubierta... cada historia comienza con una página en blanco.",
+    gustan:
+      "Todavía no has marcado ningún libro como favorito, pero hay muchos esperando tu corazón.",
+    leidos:
+      "Aún no has terminado ningún libro, pero el viaje está por comenzar.",
+    leyendo:
+      "No tienes lecturas activas, ¿te animas a empezar una nueva aventura?",
+    porleer:
+      "Tu lista de deseos está vacía... elige el próximo libro que te llame.",
+  };
   return (
     <>
       <header className="mt-10 gap-8 p-6 profile__background-image">
         <section className="bg-black/90 rounded-3xl mt-5 max-w-[980px] grid grid-col">
-          <div className="flex flex-col md:flex-row gap-5 p-3 m-auto">
-            <div className="relative group m-auto mt-3">
+          <div className="flex flex-col md:flex-row gap-5 w-full p-3 mr-auto">
+            <div className="relative group m-auto md:m-0">
               <img
                 src={user.avatar}
                 alt="Imagen del avatar del perfil"
@@ -95,7 +118,7 @@ function Profile() {
                 />
               </button>
             </div>
-            <div className="my-auto">
+            <div className="my-auto w-full">
               <div className="flex items-baseline gap-2">
                 <p className="profile__title">Nombre:</p>
                 <p>{user.name}</p>
@@ -114,7 +137,7 @@ function Profile() {
                 </button>
               </div>
               <div className="flex items-baseline gap-2">
-                <p className="profile__title">Correo eléctronico:</p>
+                <p className="profile__title">Correo:</p>
                 <p>{user.email}</p>
               </div>
               <div className="flex flex-col items-baseline">
@@ -123,12 +146,12 @@ function Profile() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row p-5">
+          <div className="flex flex-col md:flex-row p-5 justify-between">
             {stats.map((item) => (
               <button
                 key={item.key}
                 onClick={() => setActiveStat(item.key)}
-                className={`font-semibold text-start m-2 p-5 rounded-2xl transition-all duration-300 cursor-pointer 
+                className={`w-full font-semibold text-xl md:text-lg text-start md:text-center m-2 p-2  rounded-2xl transition-all duration-300 cursor-pointer 
     ${activeStat === item.key ? item.color : "bg-transparent"} 
     ${item.hover}`}
               >
@@ -141,10 +164,16 @@ function Profile() {
       <main>
         {activeStat && (
           <section className="mt-10 max-w-[1680px] mx-auto px-5 md:px-10">
-            <h2 className="text-[30px] md:text-[50px] mb-3 md:mb-6 profile__main-title">
+            <h2 className="text-[30px] md:text-[50px] profile__main-title">
               {stats.find((s) => s.key === activeStat)?.label}
             </h2>
-            <BookGrid books={books.filter(filters[activeStat])} />
+            {modifiedBooks.filter(filters[activeStat]).length > 0 ? (
+              <BookGrid books={modifiedBooks.filter(filters[activeStat])} />
+            ) : (
+              <p className="text-center text-lg md:text-xl text-gray-500 italic my-40">
+                {emptyMessages[activeStat]}
+              </p>
+            )}{" "}
           </section>
         )}
       </main>

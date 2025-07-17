@@ -1,31 +1,37 @@
-import { useContext, useState, useRef } from "react";
-import { UserContext } from "../../../contexts/UserContext";
+import { useRef, useState, useEffect, useContext } from "react";
 import useOutsideClick from "../../../hooks/useClickOutside";
 import close from "@icons/close.svg";
 import "../PopupAvatar/PopupAvatar.css";
+import { getUserData, updateUserData } from "../../../utils/localStorageUser";
+import { UserContext } from "../../../contexts/UserContext";
 
 function PopupUser({ isOpen, onClose }) {
-  const { user, setUser } = useContext(UserContext);
-  const [formData, setFormData] = useState({
-    name: user.name,
-    email: user.email,
-    about: user.about,
-  });
-
   const modalRef = useRef();
+  const { user, setUser } = useContext(UserContext);
   useOutsideClick(modalRef, onClose);
+  const [name, setName] = useState("");
+  const [about, setAbout] = useState("");
 
-  if (!isOpen) return null;
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  useEffect(() => {
+    if (isOpen && user?.uid) {
+      const data = getUserData(user.uid);
+      setName(data.name || "");
+      setAbout(data.about || "");
+    }
+  }, [isOpen, user?.uid]);
 
   const handleSave = () => {
-    setUser((prev) => ({ ...prev, ...formData }));
+    updateUserData(user.uid, { name, about });
+    setUser((prev) => ({
+      ...prev,
+      name,
+      about,
+    }));
+
     onClose();
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-stone-950/50 flex justify-center items-center z-50">
@@ -54,21 +60,8 @@ function PopupUser({ isOpen, onClose }) {
             <input
               type="text"
               name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="border border-stone-300 rounded-xl p-2"
-            />
-          </label>
-
-          <label className="flex flex-col">
-            <p className="popup__subtitle text-sm font-medium mb-2">
-              Correo electrónico:
-            </p>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="border border-stone-300 rounded-xl p-2"
             />
           </label>
@@ -79,8 +72,8 @@ function PopupUser({ isOpen, onClose }) {
             </p>
             <textarea
               name="about"
-              value={formData.about}
-              onChange={handleChange}
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
               rows="4"
               className="border border-stone-300 rounded-xl p-2 resize-none"
             />
